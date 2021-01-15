@@ -1,0 +1,41 @@
+body {
+    background: #444444;
+    font-family: verdana, arial, sans-serif;
+    color: #444444;
+    font-size: 12px;
+    margin: 0px;
+}
+
+div#container {
+    width: 800px;
+    margin: 0px auto;
+    background: #FFFFFF;
+    padding: 0px;
+}
+
+div#content {
+    width: 800px;
+    padding-top: 100px;
+    background: yellow;
+}
+
+div#header {
+    width: 800px;
+    height: 100px;
+    background: blue;
+    position: absolute;
+    top: 0px;
+}
+
+.svg {
+    display: block;
+    margin: auto;
+    border-style:solid; 
+    border-width:1; 
+    border-color:#000;
+}
+
+.clearfix:after {content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.clearfix {display:inline-block;}
+/* Hide from IE Mac \*/
+.clearfix {display:block;}
