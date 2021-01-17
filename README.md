@@ -1,5 +1,7 @@
 # OrgoChemVisualizer
 
+[![Documentation Status](https://readthedocs.org/projects/orgochemvisualizer/badge/?version=latest)](https://orgochemvisualizer.readthedocs.io/en/latest/?badge=latest)
+
 This code is used to visualize chemical reactions from Organic Chemistry. It is intended to be a teaching tool for college students taking undergraduate Organic Chemistry.
 
 ## Usage
