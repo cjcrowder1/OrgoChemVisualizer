@@ -30,6 +30,8 @@ class AnimationViewer(pg.GraphicsLayoutWidget):
         
         v.addItem(mol1)
         v.addItem(mol2)
+        v.addItem(mol3)
+        
 
 
 class MainWindow(QtWidgets.QMainWindow):
