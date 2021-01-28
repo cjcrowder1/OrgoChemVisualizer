@@ -156,3 +156,28 @@ class CO2(Chemical):
 
     def get_texts(self):
         return ["O", "C", "O"]
+
+class HBr(Chemical):
+    def __init__(self):
+        super(HBr, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        texts = self.get_texts()
+
+        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
+
+    def get_positions(self):
+        return np.array([
+                        [-2, 0],
+                        [0, 0],
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                        ])
+    
+    def get_texts(self):
+        return ["H", "Br"]
+        
