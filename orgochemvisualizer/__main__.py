@@ -26,7 +26,7 @@ class AnimationViewer(pg.GraphicsLayoutWidget):
 
         mol1 = ca.H2O()
         mol2 = ca.CO2()
-        
+
         v.addItem(mol1)
         v.addItem(mol2)
 
