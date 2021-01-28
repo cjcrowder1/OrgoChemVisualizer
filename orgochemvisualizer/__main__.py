@@ -28,10 +28,11 @@ class AnimationViewer(pg.GraphicsLayoutWidget):
         mol2 = ca.CO2()
         mol3 = ca.HBr()
         
+
         v.addItem(mol1)
         v.addItem(mol2)
         v.addItem(mol3)
-        
+
 
 
 class MainWindow(QtWidgets.QMainWindow):
