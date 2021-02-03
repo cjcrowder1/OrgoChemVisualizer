@@ -47,6 +47,27 @@ class AnimationViewer(pg.GraphicsView):
         self.anim.start()
 
 
+class ReactionSelection(QtWidgets.QWidget):
+    """ class containing settings for selecting which reaction to view """
+    def __init__(self, parent=None):
+        super(ReactionSelection, self).__init__(parent)
+
+        layout = QtWidgets.QVBoxLayout()
+        reaction_label = QtGui.QLabel("Choose which reaction to view")
+        self.viewHBrRadio = QtGui.QRadioButton("Addition to HBr to Alkenes")
+        self.viewSN2Radio = QtGui.QRadioButton("SN2")
+        self.viewE1Radio = QtGui.QRadioButton("E1")
+
+        self.viewHBrRadio.setChecked(True)
+
+        layout.addWidget(reaction_label)
+        layout.addWidget(self.viewHBrRadio)
+        layout.addWidget(self.viewSN2Radio)
+        layout.addWidget(self.viewE1Radio)
+
+        self.setLayout(layout)
+
+
 class Settings(QtWidgets.QWidget):
     """ main settings class """
     def __init__(self, parent=None):
@@ -55,8 +76,10 @@ class Settings(QtWidgets.QWidget):
         layout = QtWidgets.QVBoxLayout()
 
         self.start_btn = QtWidgets.QPushButton("Start", self)
+        self.rs = ReactionSelection()
 
         layout.addWidget(self.start_btn)
+        layout.addWidget(self.rs)
         layout.addStretch(1)
 
         self.setLayout(layout)
