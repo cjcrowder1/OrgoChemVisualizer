@@ -2,9 +2,13 @@
 
 block_cipher = None
 
+# pyinstaller orgochemvisualizer/__main__.py \
+#    --onefile --clean \
+#    -p orgochemvisualizer/  \
+#    -n OrgoExe
 
 a = Analysis(['orgochemvisualizer/__main__.py'],
-             pathex=['orgochemvisualizer/'],
+             pathex=['orgochemvisualizer/', '/home/peastham/Desktop/UROP-projects/OrgoChemVisualizer'],
              binaries=[],
              datas=[],
              hiddenimports=[],
