@@ -28,12 +28,14 @@ class AnimationViewer(pg.GraphicsLayoutWidget):
         mol2 = ca.CO2()
         mol3 = ca.HBr()
         mol4 = ca.CH3Br()
+        mol5 = ca.OH()
         
 
         v.addItem(mol1)
         v.addItem(mol2)
         v.addItem(mol3)
         v.addItem(mol4)
+        v.addItem(mol5)
 
 
 

@@ -210,5 +210,28 @@ class CH3Br(Chemical):
     
     def get_texts(self):
         return ["H", "C", "H", "Br", "H"]
-        
-        
+
+class OH(Chemical):
+    def __init__(self):
+        super(OH, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        texts = self.get_texts()
+
+        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
+
+    def get_positions(self):
+        return np.array([
+                        [-2, -1],
+                        [-1, -1],
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                         ])
+    
+    def get_texts(self):
+        return ["-O", "H"]
+
