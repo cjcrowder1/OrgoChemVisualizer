@@ -27,11 +27,13 @@ class AnimationViewer(pg.GraphicsLayoutWidget):
         mol1 = ca.H2O()
         mol2 = ca.CO2()
         mol3 = ca.HBr()
+        mol4 = ca.CH3Br()
         
 
         v.addItem(mol1)
         v.addItem(mol2)
         v.addItem(mol3)
+        v.addItem(mol4)
 
 
 
