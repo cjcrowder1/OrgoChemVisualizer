@@ -52,6 +52,17 @@ class AnimationViewer(pg.GraphicsView):
 
         self.anim.start()
 
+#Initial animation for CH3Br
+        self.anim = QtCore.QPropertyAnimation(mol4, b'pos')
+        self.anim.setDuration(8000)
+        self.anim.setStartValue(QtCore.QpointF(0, 0))
+
+        self.anim.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
+
+        self.anim.setEndValue(QtCore.QPointF(3, 3))
+
+        self.anim.start()
+
 
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
