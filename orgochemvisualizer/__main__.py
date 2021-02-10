@@ -55,7 +55,7 @@ class AnimationViewer(pg.GraphicsView):
 #Initial animation for CH3Br
         self.anim = QtCore.QPropertyAnimation(mol4, b'pos')
         self.anim.setDuration(8000)
-        self.anim.setStartValue(QtCore.QpointF(0, 0))
+        self.anim.setStartValue(QtCore.QPointF(0, 0))
 
         self.anim.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
 
