@@ -42,37 +42,37 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(mol5)
         self.addItem(mol6)
 
-        self.anim = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.anim.setDuration(8000)
-        self.anim.setStartValue(QtCore.QPointF(0, 0))
+        self.anim1 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.anim1.setDuration(8000)
+        self.anim1.setStartValue(QtCore.QPointF(0, 0))
 
-        self.anim.setKeyValueAt(0.3, QtCore.QPointF(1, 0))
+        self.anim1.setKeyValueAt(0.3, QtCore.QPointF(1, 0))
 
-        self.anim.setEndValue(QtCore.QPointF(4, 4))
+        self.anim1.setEndValue(QtCore.QPointF(4, 4))
 
-        self.anim.start()
+        self.anim1.start()
 
 #Initial animation for CH3Br
-        self.anim = QtCore.QPropertyAnimation(mol4, b'pos')
-        self.anim.setDuration(8000)
-        self.anim.setStartValue(QtCore.QPointF(0, 0))
+        self.anim2 = QtCore.QPropertyAnimation(mol4, b'pos')
+        self.anim2.setDuration(8000)
+        self.anim2.setStartValue(QtCore.QPointF(0, 0))
 
-        self.anim.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
+        self.anim2.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
 
-        self.anim.setEndValue(QtCore.QPointF(3, 3))
+        self.anim2.setEndValue(QtCore.QPointF(3, 3))
 
-        self.anim.start()
+        self.anim2.start()
 
 #Initial animation for OH-
-        self.anim = QtCore.QPropertyAnimation(mol5, b'pos')
-        self.anim.setDuration(8000)
-        self.anim.setStartValue(QtCore.QPointF(-2, 0))
+        self.anim3 = QtCore.QPropertyAnimation(mol5, b'pos')
+        self.anim3.setDuration(8000)
+        self.anim3.setStartValue(QtCore.QPointF(-2, 0))
 
-        self.anim.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        self.anim3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
 
-        self.anim.setEndValue(QtCore.QPointF(2, 2))
+        self.anim3.setEndValue(QtCore.QPointF(2, 2))
 
-        self.anim.start() 
+        self.anim3.start() 
 
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
