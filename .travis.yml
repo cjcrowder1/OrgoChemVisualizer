@@ -31,15 +31,11 @@ jobs:
       script: python3 -m unittest -v || python -m unittest -v
       before_deploy: 
         - pyinstaller --onefile --clean --windowed --paths orgochemvisualizer --name orgochemviz_macos --osx-bundle-identifier UROP.OSS.chem orgochemvisualizer/__main__.py 
-        - |
-          if [[ $TRAVIS_OS_NAME == "osx" ]]; then
-            sudo chown -R "$USER:$(id -g)" /Users/travis/.rvm/rubies/
-            rvm $(travis_internal_ruby) do gem uninstall openssl --all
-          fi
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
-        file: dist/orgochemviz_macos.app
+        file_glob: true
+        file: dist/*
         skip_cleanup: true
         draft: true
         on:
