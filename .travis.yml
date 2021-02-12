@@ -9,11 +9,15 @@ jobs:
         - pip3 install -r requirements.txt
         - pip3 install pyinstaller
       script: python3 -m unittest -v || python -m unittest -v
-      before_deploy: pyinstaller --onefile --clean main.py -n linux_main
+      before_deploy: 
+        - pyinstaller orgochemvisualizer/__main__.py \
+            --onefile --clean \
+            -p orgochemvisualizer/  \
+            -n orgochemviz_linux
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
-        file: dist/linux_main
+        file: dist/orgochemviz_linux
         skip_cleanup: true
         draft: true
         on:
@@ -28,11 +32,15 @@ jobs:
         - pip3 install -r requirements.txt
         - pip3 install pyinstaller
       script: python3 -m unittest -v || python -m unittest -v
-      before_deploy: pyinstaller --onefile --clean main.py --windowed -n macos_main
+      before_deploy: 
+        - pyinstaller orgochemvisualizer/__main__.py \
+            --onefile --clean --windowed \
+            -p orgochemvisualizer/  \
+            -n orgochemviz_macos
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
-        file: dist/macos_main.app
+        file: dist/orgochemviz_macos.app
         skip_cleanup: true
         draft: true
         on:
@@ -50,11 +58,15 @@ jobs:
         - pip3 install -r requirements.txt
         - pip3 install pyinstaller
       script: python3 -m unittest -v || python -m unittest -v
-      before_deploy: pyinstaller --onefile --clean main.py -n windows_main.exe
+      before_deploy: 
+        - pyinstaller orgochemvisualizer/__main__.py \
+            --onefile --clean --windowed \
+            -p orgochemvisualizer/  \
+            -n orgochemviz_windows.exe
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
-        file: dist\windows_main.exe
+        file: dist\orgochemviz_windows.exe
         skip_cleanup: true
         draft: true
         on:
