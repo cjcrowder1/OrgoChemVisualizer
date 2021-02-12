@@ -14,7 +14,7 @@ jobs:
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
-        file: dist/orgochemviz_linux
+        file: dist/orgochemviz_linux.exe
         skip_cleanup: true
         draft: true
         on:
