@@ -2,7 +2,8 @@ language: python            # this works for Linux but is an error on macOS or W
 
 jobs:
   include:
-    - name: "Python 3.8.0 on Xenial Linux"
+    - name: "Python 3.8.0 on Focal Linux"
+      dist: focal
       python: 3.8           # this works for Linux but is ignored on macOS or Windows
       install: 
         - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
@@ -28,7 +29,7 @@ jobs:
         - pip3 install -r requirements.txt
         - pip3 install pyinstaller
       script: python3 -m unittest -v || python -m unittest -v
-      before_deploy: pyinstaller orgochemvisualizer/__main__.py --onefile --clean --windowed --paths orgochemvisualizer --name orgochemviz_macos
+      before_deploy: pyinstaller orgochemvisualizer/__main__.py --onefile --clean --windowed --paths orgochemvisualizer --name orgochemviz_macos.app
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
