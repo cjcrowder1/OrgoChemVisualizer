@@ -31,11 +31,12 @@ jobs:
       script: python3 -m unittest -v || python -m unittest -v
       before_deploy: 
         - pyinstaller --onefile --clean --windowed --paths orgochemvisualizer --name orgochemviz_macos --osx-bundle-identifier UROP.OSS.chem orgochemvisualizer/__main__.py 
+        - zip dist/orgochemviz_macos.zip dist/orgochemviz_macos.app -r    # zip up app
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
         file_glob: true
-        file: dist/*
+        file: dist/orgochemviz_macos.zip
         skip_cleanup: true
         draft: true
         on:
