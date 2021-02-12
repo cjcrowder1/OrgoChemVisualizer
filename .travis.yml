@@ -11,9 +11,9 @@ jobs:
       script: python3 -m unittest -v || python -m unittest -v
       before_deploy: 
         - pyinstaller orgochemvisualizer/__main__.py \
-            --onefile --clean \
-            -p orgochemvisualizer/  \
-            -n orgochemviz_linux
+          --onefile --clean \
+          --paths orgochemvisualizer  \
+          --name orgochemviz_linux
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
@@ -34,9 +34,9 @@ jobs:
       script: python3 -m unittest -v || python -m unittest -v
       before_deploy: 
         - pyinstaller orgochemvisualizer/__main__.py \
-            --onefile --clean --windowed \
-            -p orgochemvisualizer/  \
-            -n orgochemviz_macos
+          --onefile --clean --windowed \
+          --paths orgochemvisualizer  \
+          --name orgochemviz_macos
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
@@ -60,9 +60,9 @@ jobs:
       script: python3 -m unittest -v || python -m unittest -v
       before_deploy: 
         - pyinstaller orgochemvisualizer/__main__.py \
-            --onefile --clean --windowed \
-            -p orgochemvisualizer/  \
-            -n orgochemviz_windows.exe
+          --onefile --clean --noconsole \
+          --paths orgochemvisualizer  \
+          --name orgochemviz_windows.exe
       deploy:
         provider: releases
         api_key: $RELEASE_TOKEN
