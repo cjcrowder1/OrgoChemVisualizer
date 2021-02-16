@@ -58,8 +58,22 @@ def LinInterp(p, q, t):
     return r
 
 
+def strToSym(string):
+    symbol = QtGui.QPainterPath()
+    f = QtGui.QFont()
+    f.setPointSize(1)
+    symbol.addText(0, 0, f, string)
+    br = symbol.boundingRect()
+    scale = min(1. / br.width(), 1. / br.height())
+    tr = QtGui.QTransform()
+    scale2 = 0.075*len(string)
+    tr.scale(scale*scale2, scale*scale2)
+    tr.translate(-br.x() - br.width() / 2., -br.y() - br.height() / 2.)
+    return tr.map(symbol)
+
+
 # test
-class Symbols():
+class TestSymbols():
     # something like a bowtie
     valves = np.asarray([
                 [0.4330127, 0.25],
@@ -78,12 +92,10 @@ class H2O(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
-    
+        sym = [strToSym('H'), strToSym('H'), strToSym('O')]
 
-        self.setData(pos=pos, adj=adj, pxMode=False, size=1, 
-                     symbol=Symbols.valve, text=texts, fontSize=0.5, 
-                     antialias=True)
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True, pen=pg.mkPen('w'))
 
     def get_positions(self):
         return np.array([
@@ -98,9 +110,6 @@ class H2O(Chemical):
                         [1, 2],
                         ])
 
-    def get_texts(self):
-        return ["H", "H", "O"]
-
 
 class CO2(Chemical):
     def __init__(self):
@@ -108,9 +117,10 @@ class CO2(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
+        sym = [strToSym("O"), strToSym("C"), strToSym("O")]
 
-        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
 
     def get_positions(self):
         return np.array([
@@ -125,9 +135,6 @@ class CO2(Chemical):
                         [1, 2],
                         ])
 
-    def get_texts(self):
-        return ["O", "C", "O"]
-
 
 class HBr(Chemical):
     def __init__(self):
@@ -135,9 +142,10 @@ class HBr(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
+        sym = [strToSym("H"), strToSym("Br")]
 
-        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
 
     def get_positions(self):
         return np.array([
@@ -150,8 +158,6 @@ class HBr(Chemical):
                         [0, 1],
                         ])
 
-    def get_texts(self):
-        return ["H", "Br"]
 
 class CH3Br(Chemical):
     def __init__(self):
@@ -159,9 +165,11 @@ class CH3Br(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
+        sym = [strToSym("H"), strToSym("C"), strToSym("Br"),
+               strToSym("H"), strToSym("H")]
 
-        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
 
     def get_positions(self):
         return np.array([
@@ -171,7 +179,7 @@ class CH3Br(Chemical):
                         [0, 1],
                         [0, -1],
                         ], dtype=float)
-    
+
     def get_edges(self):
         return np.array([
                         [0, 1],
@@ -179,9 +187,7 @@ class CH3Br(Chemical):
                         [3, 1],
                         [4, 1],
                         ])
-    
-    def get_texts(self):
-        return ["H", "C", "Br", "H", "H"]
+
 
 class OH(Chemical):
     def __init__(self):
@@ -189,9 +195,10 @@ class OH(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
+        sym = [strToSym('H'), strToSym('O')]
 
-        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
 
     def get_positions(self):
         return np.array([
@@ -203,9 +210,7 @@ class OH(Chemical):
         return np.array([
                         [0, 1],
                          ])
-    
-    def get_texts(self):
-        return ["H", "O-"]
+
 
 class CH3OH(Chemical):
     def __init__(self):
@@ -213,10 +218,12 @@ class CH3OH(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
+        sym = [strToSym('H'), strToSym('O'), strToSym('C'),
+               strToSym('H'), strToSym('H'), strToSym('H')]
 
-        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
-    
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
+
     def get_positions(self):
         return np.array([
                         [-2, 0],
@@ -235,30 +242,25 @@ class CH3OH(Chemical):
                         [4, 2],
                         [5, 2],
                         ])
-    def get_texts(self):
-        return ["H", "O", "C", "H", "H", "H"]
+
 
 class Br(Chemical):
     def __init__(self):
         super(Br, self).__init__()
-       
+
         pos = self.get_positions()
         adj = self.get_edges()
-        texts = self.get_texts()
+        sym = [strToSym('Br')]
 
-        self.setData(pos=pos, adj=adj, pxMode=True, text=texts)
-    
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
+
     def get_positions(self):
         return np.array([
                         [1, 0],
                         ], dtype=float)
-    
+
     def get_edges(self):
         return np.array([
                         [0, 0],
                         ])
-    
-    def get_texts(self):
-        return ["Br-"]
-
-
