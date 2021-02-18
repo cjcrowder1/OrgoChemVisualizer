@@ -264,3 +264,42 @@ class Br(Chemical):
         return np.array([
                         [0, 0],
                         ])
+
+class C3H7Br(Chemical):
+    def __init__(self):
+        super(C3H7Br, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('H'),
+               strToSym('C'), strToSym('C'), strToSym('H'), 
+               strToSym('Br'), strToSym('C'), strToSym('H'),
+               strToSym('H'), strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
+    def get_positions(self):
+        return np.array([
+                        [-3, -4], 
+                        [-3, -5],
+                        [-3, -6], 
+                        [-2, -5], 
+                        [-1, -5], 
+                        [-1, -6],
+                        [-1, -4],
+                        [0, -5],
+                        [0, -4], 
+                        [0, -6],
+                        ], dtype=float)
+    def get_edges(self):
+        return np.array([
+                        [0, 3],
+                        [1, 3],
+                        [2, 3],
+                        [3, 4],
+                        [5, 4], 
+                        [6, 4], 
+                        [4, 7], 
+                        [8, 7], 
+                        [9, 7],
+                        ])
