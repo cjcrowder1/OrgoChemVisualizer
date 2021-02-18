@@ -355,3 +355,29 @@ class C4H9Br(Chemical):
                         [12, 10],
                         [13, 10],
                         ])
+
+class H3O(Chemical):
+    def __init__(self):
+        super(H3O, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('H'), strToSym('O')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True, pen=pg.mkPen('w'))
+
+    def get_positions(self):
+        return np.array([
+                        [-3, -0.5],
+                        [-2, -1.5],
+                        [-1, -0.5],
+                        [-2, -0.5],
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 3],
+                        [1, 3],
+                        [2, 3],
+                        ])

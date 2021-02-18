@@ -36,6 +36,7 @@ class AnimationViewer(pg.GraphicsView):
         mol6 = ca.Br()
         mol7 = ca.C3H7Br()
         mol8 = ca.C4H9Br()
+        mol9 = ca.H3O()
 
         self.addItem(mol1)
         self.addItem(mol2)
@@ -45,7 +46,8 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(mol6)
         self.addItem(mol7)
         self.addItem(mol8)
-        
+        self.addItem(mol9)
+
 
         self.anim1 = QtCore.QPropertyAnimation(mol1, b'pos')
         self.anim1.setDuration(8000)
