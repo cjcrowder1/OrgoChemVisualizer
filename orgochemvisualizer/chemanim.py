@@ -265,6 +265,7 @@ class Br(Chemical):
                         [0, 0],
                         ])
 
+#this is in line format, could also do a more simplified format of the molecule
 class C3H7Br(Chemical):
     def __init__(self):
         super(C3H7Br, self).__init__()
@@ -290,6 +291,7 @@ class C3H7Br(Chemical):
                         [0, -5],
                         [0, -4], 
                         [0, -6],
+                        [1, -5],
                         ], dtype=float)
     def get_edges(self):
         return np.array([
@@ -302,4 +304,54 @@ class C3H7Br(Chemical):
                         [4, 7], 
                         [8, 7], 
                         [9, 7],
+                        [10, 7],
+                        ])
+
+
+class C4H9Br(Chemical):
+    def __init__(self):
+        super(C4H9Br, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('H'),
+               strToSym('C'), strToSym('C'), strToSym('H'), 
+               strToSym('Br'), strToSym('C'), strToSym('H'),
+               strToSym('H'), strToSym('C'), strToSym('H'), 
+               strToSym('H'), strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
+    def get_positions(self):
+        return np.array([
+                        [-3, -4], 
+                        [-3, -5],
+                        [-3, -6], 
+                        [-2, -5], 
+                        [-1, -5], 
+                        [-1, -6],
+                        [-1, -4],
+                        [0, -5],
+                        [0, -4], 
+                        [0, -6],
+                        [1, -5],
+                        [1, -4],
+                        [1, -6],
+                        [2, -5],
+                        ], dtype=float)
+    def get_edges(self):
+        return np.array([
+                        [0, 3],
+                        [1, 3],
+                        [2, 3],
+                        [3, 4],
+                        [5, 4], 
+                        [6, 4], 
+                        [4, 7], 
+                        [8, 7], 
+                        [9, 7],
+                        [7, 10],
+                        [11, 10],
+                        [12, 10],
+                        [13, 10],
                         ])
