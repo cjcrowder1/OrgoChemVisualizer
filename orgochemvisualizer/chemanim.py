@@ -381,3 +381,41 @@ class H3O(Chemical):
                         [1, 3],
                         [2, 3],
                         ])
+
+class C3H6(Chemical):
+    def __init__(self):
+        super(C3H6, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('H'), strToSym('C'),
+                strToSym('C'), strToSym('H'), strToSym('C'), strToSym('H'), 
+                strToSym('H'), strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True, pen=pg.mkPen('w'))
+
+        def get_positions(self):
+            return np.array([
+                            [-8, 14],
+                            [-9, 13],
+                            [-8, 12],
+                            [-8, 13], 
+                            [-7, 13],
+                            [-7, 12],
+                            [-6, 13],
+                            [-6, 14],
+                            [-6, 12],
+                            ], dtype=float)
+
+        def get_edges(self):
+            return np.array([
+                            [0, 3],
+                            [1, 3],
+                            [2, 3],
+                            [3, 4], 
+                            [5, 4],
+                            [4, 6], 
+                            [7, 6], 
+                            [8, 6],
+                            ])
