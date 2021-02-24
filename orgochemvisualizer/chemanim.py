@@ -382,6 +382,7 @@ class H3O(Chemical):
                         [2, 3],
                         ])
 
+#alkene needs double bond
 class C3H6(Chemical):
     def __init__(self):
         super(C3H6, self).__init__()
@@ -390,7 +391,7 @@ class C3H6(Chemical):
         adj = self.get_edges()
         sym = [strToSym('H'), strToSym('H'), strToSym('H'), strToSym('C'),
                 strToSym('C'), strToSym('H'), strToSym('C'), strToSym('H'), 
-                strToSym('H'), strToSym('H')]
+                strToSym('H')]
 
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True, pen=pg.mkPen('w'))
@@ -420,6 +421,7 @@ class C3H6(Chemical):
                             [8, 6],
                             ])
 
+#needs a + charge
 class C3H7(Chemical):
     def __init__(self):
         super(C3H7, self).__init__()
@@ -428,23 +430,23 @@ class C3H7(Chemical):
         adj = self.get_edges()
         sym = [strToSym('H'), strToSym('H'), strToSym('H'), strToSym('C'),
                 strToSym('C'), strToSym('H'), strToSym('C'), strToSym('H'), 
-                strToSym('H'), strToSym('H'), strToSym('H')]
+                strToSym('H'), strToSym('H')]
 
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True, pen=pg.mkPen('w'))
 
         def get_positions(self):
             return np.array([
-                            [-8, 14],
-                            [-9, 13],
-                            [-8, 12],
-                            [-8, 13], 
-                            [-7, 13],
-                            [-7, 12],
-                            [-6, 13],
-                            [-6, 14],
-                            [-5, 13],
-                            [-6, 12],
+                            [-1, 14],
+                            [-2, 13],
+                            [-1, 12],
+                            [-1, 13], 
+                            [0, 13],
+                            [0, 12],
+                            [1, 13],
+                            [1, 14],
+                            [2, 13],
+                            [1, 12],
                             ], dtype=float)
 
         def get_edges(self):
