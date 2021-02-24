@@ -52,38 +52,38 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(mol10)
         self.addItem(mol11)
 
+#Initial animation for H2O
+        self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S1.setDuration(8000)
+        self.R3S1.setStartValue(QtCore.QPointF(0, 0))
 
-        self.anim1 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.anim1.setDuration(8000)
-        self.anim1.setStartValue(QtCore.QPointF(0, 0))
+        self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(1, 0))
 
-        self.anim1.setKeyValueAt(0.3, QtCore.QPointF(1, 0))
+        self.R3S1.setEndValue(QtCore.QPointF(4, 4))
 
-        self.anim1.setEndValue(QtCore.QPointF(4, 4))
-
-        self.anim1.start()
+        self.R3S1.start()
 
 #Initial animation for CH3Br
-        self.anim2 = QtCore.QPropertyAnimation(mol4, b'pos')
-        self.anim2.setDuration(8000)
-        self.anim2.setStartValue(QtCore.QPointF(0, 0))
+        self.R2S1 = QtCore.QPropertyAnimation(mol4, b'pos')
+        self.R2S1.setDuration(8000)
+        self.R2S1.setStartValue(QtCore.QPointF(0, 0))
 
-        self.anim2.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
+        self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
 
-        self.anim2.setEndValue(QtCore.QPointF(3, 3))
+        self.R2S1.setEndValue(QtCore.QPointF(3, 3))
 
-        self.anim2.start()
+        self.R2S1.start()
 
 #Initial animation for OH-
-        self.anim3 = QtCore.QPropertyAnimation(mol5, b'pos')
-        self.anim3.setDuration(8000)
-        self.anim3.setStartValue(QtCore.QPointF(-2, 0))
+        self.R2S2 = QtCore.QPropertyAnimation(mol5, b'pos')
+        self.R2S2.setDuration(8000)
+        self.R2S2.setStartValue(QtCore.QPointF(-2, 0))
 
-        self.anim3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
 
-        self.anim3.setEndValue(QtCore.QPointF(2, 2))
+        self.R2S2.setEndValue(QtCore.QPointF(2, 2))
 
-        self.anim3.start() 
+        self.R2S2.start() 
 
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
