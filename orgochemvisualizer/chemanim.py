@@ -173,11 +173,11 @@ class CH3Br(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-1, 0],
-                        [0, 0],
-                        [1, 0],
-                        [0, 1],
-                        [0, -1],
+                        [-6, 0],
+                        [-5, 0],
+                        [-4, 0],
+                        [-5, 1],
+                        [-5, -1],
                         ], dtype=float)
 
     def get_edges(self):
@@ -202,8 +202,8 @@ class OH(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-2, -1],
-                        [-1, -1],
+                        [-9, -1],
+                        [-8, -1],
                         ], dtype=float)
 
     def get_edges(self):
@@ -226,12 +226,12 @@ class CH3OH(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-2, 0],
-                        [-1, 0],
-                        [0, 0],
-                        [1, 0],
-                        [0, 1],
-                        [0, -1],
+                        [7, 0],
+                        [6, 0],
+                        [5, 0],
+                        [4, 0],
+                        [5, 1],
+                        [5, -1],
                         ], dtype=float)
 
     def get_edges(self):
@@ -257,7 +257,7 @@ class Br(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [1, 0],
+                        [9, 0],
                         ], dtype=float)
 
     def get_edges(self):
