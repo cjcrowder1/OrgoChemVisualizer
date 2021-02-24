@@ -396,30 +396,30 @@ class C3H6(Chemical):
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True, pen=pg.mkPen('w'))
 
-        def get_positions(self):
-            return np.array([
-                            [-8, 14],
-                            [-9, 13],
-                            [-8, 12],
-                            [-8, 13],
-                            [-7, 13],
-                            [-7, 12],
-                            [-6, 13],
-                            [-6, 14],
-                            [-6, 12],
-                            ], dtype=float)
+    def get_positions(self):
+        return np.array([
+                        [-8, 14],
+                        [-9, 13],
+                        [-8, 12],
+                        [-8, 13],
+                        [-7, 13],
+                        [-7, 12],
+                        [-6, 13],                            
+                        [-6, 14],
+                        [-6, 12],
+                        ], dtype=float)
 
-        def get_edges(self):
-            return np.array([
-                            [0, 3],
-                            [1, 3],
-                            [2, 3],
-                            [3, 4], 
-                            [5, 4],
-                            [4, 6], 
-                            [7, 6], 
-                            [8, 6],
-                            ])
+    def get_edges(self):
+        return np.array([
+                        [0, 3],
+                        [1, 3],
+                        [2, 3],
+                        [3, 4], 
+                        [5, 4],
+                        [4, 6], 
+                        [7, 6],                             
+                        [8, 6],
+                        ])
 
 #needs a + charge
 class C3H7(Chemical):
@@ -435,29 +435,29 @@ class C3H7(Chemical):
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True, pen=pg.mkPen('w'))
 
-        def get_positions(self):
-            return np.array([
-                            [-1, 14],
-                            [-2, 13],
-                            [-1, 12],
-                            [-1, 13], 
-                            [0, 13],
-                            [0, 12],
-                            [1, 13],
-                            [1, 14],
-                            [2, 13],
-                            [1, 12],
-                            ], dtype=float)
+    def get_positions(self):
+        return np.array([
+                        [-1, 14],
+                        [-2, 13],
+                        [-1, 12],
+                        [-1, 13], 
+                        [0, 13],
+                        [0, 12],
+                        [1, 13],
+                        [1, 14],
+                        [2, 13],
+                        [1, 12],
+                        ], dtype=float)
 
-        def get_edges(self):
-            return np.array([
-                            [0, 3],
-                            [1, 3],
-                            [2, 3],
-                            [3, 4], 
-                            [5, 4],
-                            [4, 6], 
-                            [7, 6], 
-                            [8, 6],
-                            [9, 6],
-                            ])
+    def get_edges(self):
+        return np.array([
+                        [0, 3],
+                        [1, 3],
+                        [2, 3],
+                        [3, 4], 
+                        [5, 4],
+                        [4, 6], 
+                        [7, 6], 
+                        [8, 6],
+                        [9, 6],
+                        ])
