@@ -422,7 +422,7 @@ class C3H6(Chemical):
 
 class C3H7(Chemical):
     def __init__(self):
-        super(C3H6, self).__init__()
+        super(C3H7, self).__init__()
 
         pos = self.get_positions()
         adj = self.get_edges()
