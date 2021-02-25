@@ -99,8 +99,8 @@ class H2O(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-0.5, -0.5],
-                        [0.5, -0.5],
+                        [-0.5, -13],
+                        [0.5, -13],
                         [0, 0],
                         ], dtype=float)
 
@@ -124,9 +124,9 @@ class CO2(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-1, 0],
-                        [0, 0],
-                        [1, 0],
+                        [-1, 13],
+                        [0, 13],
+                        [1, 13],
                         ], dtype=float)
 
     def get_edges(self):
@@ -149,8 +149,8 @@ class HBr(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-2, 0],
-                        [0, 0],
+                        [-5.5, -9],
+                        [-4, -9],
                         ], dtype=float)
 
     def get_edges(self):
@@ -226,12 +226,12 @@ class CH3OH(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [7, 0],
-                        [6, 0],
-                        [5, 0],
                         [4, 0],
-                        [5, 1],
-                        [5, -1],
+                        [3, 0],
+                        [2, 0],
+                        [1, 0],
+                        [2, 1],
+                        [2, -1],
                         ], dtype=float)
 
     def get_edges(self):
@@ -250,7 +250,7 @@ class Br(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        sym = [strToSym('Br')]
+        sym = [strToSym('Br-')]
 
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True)
@@ -281,17 +281,17 @@ class C3H7Br(Chemical):
                      symbol=sym, antialias=True)
     def get_positions(self):
         return np.array([
-                        [-3, -4], 
-                        [-3, -5],
-                        [-3, -6], 
-                        [-2, -5], 
-                        [-1, -5], 
-                        [-1, -6],
-                        [-1, -4],
-                        [0, -5],
-                        [0, -4], 
-                        [0, -6],
-                        [1, -5],
+                        [6, -5], 
+                        [5, -6],
+                        [6, -7], 
+                        [6, -6], 
+                        [7, -6], 
+                        [7, -7],
+                        [7, -5],
+                        [8, -6],
+                        [8, -5], 
+                        [8, -7],
+                        [9, -6],
                         ], dtype=float)
     def get_edges(self):
         return np.array([
@@ -324,20 +324,20 @@ class C4H9Br(Chemical):
                      symbol=sym, antialias=True)
     def get_positions(self):
         return np.array([
-                        [-3, -4], 
-                        [-3, -5],
-                        [-3, -6], 
-                        [-2, -5], 
-                        [-1, -5], 
-                        [-1, -6],
-                        [-1, -4],
-                        [0, -5],
-                        [0, -4], 
-                        [0, -6],
-                        [1, -5],
-                        [1, -4],
-                        [1, -6],
-                        [2, -5],
+                        [-8, 7], 
+                        [-9, 8],
+                        [-8, 9], 
+                        [-8, 8], 
+                        [-7, 8], 
+                        [-7, 9],
+                        [-7, 7],
+                        [-6, 8],
+                        [-6, 7], 
+                        [-6, 9],
+                        [-5, 8],
+                        [-5, 7],
+                        [-5, 9],
+                        [-4, 8],
                         ], dtype=float)
     def get_edges(self):
         return np.array([
@@ -369,10 +369,10 @@ class H3O(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-3, -0.5],
-                        [-2, -1.5],
-                        [-1, -0.5],
-                        [-2, -0.5],
+                        [-3, -13],
+                        [-2, -12],
+                        [-1, -11],
+                        [-2, -13],
                         ], dtype=float)
 
     def get_edges(self):
@@ -398,15 +398,15 @@ class C3H6(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-8, 14],
-                        [-9, 13],
-                        [-8, 12],
-                        [-8, 13],
-                        [-7, 13],
-                        [-7, 12],
-                        [-6, 13],                            
-                        [-6, 14],
-                        [-6, 12],
+                        [-9, -7],
+                        [-10, -6],
+                        [-9, -5],
+                        [-9, -6],
+                        [-8, -6],
+                        [-8, -5],
+                        [-7, -6],                            
+                        [-7, -7],
+                        [-7, -5],
                         ], dtype=float)
 
     def get_edges(self):
@@ -437,16 +437,16 @@ class C3H7(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-1, 14],
-                        [-2, 13],
-                        [-1, 12],
-                        [-1, 13], 
-                        [0, 13],
-                        [0, 12],
-                        [1, 13],
-                        [1, 14],
-                        [2, 13],
-                        [1, 12],
+                        [-1, -7],
+                        [-2, -6],
+                        [-1, -5],
+                        [-1, -6], 
+                        [0, -6],
+                        [0, -5],
+                        [1, -6],
+                        [1, -7],
+                        [2, -6],
+                        [1, -5],
                         ], dtype=float)
 
     def get_edges(self):
@@ -461,3 +461,25 @@ class C3H7(Chemical):
                         [8, 6],
                         [9, 6],
                         ])
+
+class Br2(Chemical):
+    def __init__(self):
+        super(Br2, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('Br-')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True)
+
+    def get_positions(self):
+        return np.array([
+                        [3, -9],
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 0],
+                        ])
+

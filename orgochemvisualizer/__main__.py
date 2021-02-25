@@ -39,6 +39,8 @@ class AnimationViewer(pg.GraphicsView):
         mol9 = ca.H3O()
         mol10 = ca.C3H6()
         mol11 = ca.C3H7()
+        mol12 = ca.CH3OH()
+        mol13 = ca.Br2()
 
         self.addItem(mol1)
         self.addItem(mol2)
@@ -51,15 +53,17 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(mol9)
         self.addItem(mol10)
         self.addItem(mol11)
+        self.addItem(mol12)
+        self.addItem(mol13)
 
 #Initial animation for H2O
         self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
         self.R3S1.setDuration(8000)
-        self.R3S1.setStartValue(QtCore.QPointF(0, 0))
+        self.R3S1.setStartValue(QtCore.QPointF(0, -13))
 
-        self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(1, 0))
+        self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
 
-        self.R3S1.setEndValue(QtCore.QPointF(4, 4))
+        self.R3S1.setEndValue(QtCore.QPointF(0, -13))
 
         self.R3S1.start()
 
@@ -68,22 +72,55 @@ class AnimationViewer(pg.GraphicsView):
         self.R2S1.setDuration(8000)
         self.R2S1.setStartValue(QtCore.QPointF(0, 0))
 
-        self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 2))
+        self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
 
-        self.R2S1.setEndValue(QtCore.QPointF(3, 3))
+        self.R2S1.setEndValue(QtCore.QPointF(0, 0))
 
         self.R2S1.start()
 
 #Initial animation for OH-
         self.R2S2 = QtCore.QPropertyAnimation(mol5, b'pos')
         self.R2S2.setDuration(8000)
-        self.R2S2.setStartValue(QtCore.QPointF(-2, 0))
+        self.R2S2.setStartValue(QtCore.QPointF(0, 0))
 
-        self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
 
-        self.R2S2.setEndValue(QtCore.QPointF(2, 2))
+        self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
 
         self.R2S2.start() 
+
+#Initial animation for CH3OH
+        self.R2S3 = QtCore.QPropertyAnimation(mol12, b'pos')
+        self.R2S3.setDuration(8000)
+        self.R2S3.setStartValue(QtCore.QPointF(0, 0))
+
+        self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+
+        self.R2S3.setEndValue(QtCore.QPointF(0, 0))
+
+        self.R2S3.start()
+
+#Initial animation for HBr
+        self.R1S2 = QtCore.QPropertyAnimation(mol3, b'pos')
+        self.R1S2.setDuration(8000)
+        self.R1S2.setStartValue(QtCore.QPointF(0, 0))
+
+        self.R1S2.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+
+        self.R1S2.setEndValue(QtCore.QPointF(0, 0))
+
+        self.R1S2.start()
+
+#Initial animation for Br-
+        self.R1S3 = QtCore.QPropertyAnimation(mol13, b'pos')
+        self.R1S3.setDuration(8000)
+        self.R1S3.setStartValue(QtCore.QPointF(0, 0))
+
+        self.R1S3.setKeyValueAt(0.3, QtCore.QPointF(-2.5, 1))
+
+        self.R1S3.setEndValue(QtCore.QPointF(-2.5, 1))
+
+        self.R1S3.start()
 
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
