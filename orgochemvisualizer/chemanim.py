@@ -11,10 +11,17 @@ import numpy as np
 import pyqtgraph as pg
 from PyQt5 import QtCore, QtGui
 
+# see https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts
+# \u2009 is a 'thin space' character that makes it easier to see superscript
+SUPNEG = '\u2009'+'\u207B'
+SUPTWO = '\u2009'+'\u00B2'
 
 class Chemical(pg.GraphItem):
     """ Class for drawing chemicals. Initial position is a
-    2-item numpy 1D-array """
+    2-item numpy 1D-array.
+
+    Right now only assumes single bonds.
+    """
 
     def __init__(self):
         self.textItems = []
@@ -26,10 +33,44 @@ class Chemical(pg.GraphItem):
     def setData(self, **kwds):
         self.text = kwds.pop('text', [])
         self.data = kwds
+
+        if 'adj' in self.data:
+            self.n_bonds = self.data['adj'].shape[0]
+
+        # right now assumes single bonds
         if 'pos' in self.data:
-            self.npts = self.data['pos'].shape[0]
-            self.data['data'] = np.empty(self.npts, dtype=[('index', int)])
-            self.data['data']['index'] = np.arange(self.npts)
+            # originals, then 2 new points per edge
+            self.n_atoms = self.data['pos'].shape[0]
+            self.npts = self.n_atoms + 2*self.n_bonds
+            new_pos = np.zeros((self.npts, 2), dtype=float)
+            for ti in range(self.n_atoms):
+                new_pos[ti, 0] = self.data['pos'][ti, 0]
+                new_pos[ti, 1] = self.data['pos'][ti, 1]
+
+            for edge, ti in enumerate(range(self.n_atoms, self.npts, 2)):
+                point1 = self.data['pos'][self.data['adj'][edge, 0]]
+                point2 = self.data['pos'][self.data['adj'][edge, 1]]
+                r1, r2 = generate_bond_nodes(point1, point2)
+                new_pos[ti, :] = r1
+                new_pos[ti+1, :] = r2
+
+            self.data['pos'] = new_pos
+            self.data['size'] = [5]*self.n_atoms + [0]*2*self.n_bonds
+            self.data['symbol'] = self.data['symbol'] + ['o']*2*self.n_bonds
+
+            # adjust the ridiculous size of Br
+            for count, sym in enumerate(self.data['symbol']):
+                if sym == strToSym('Br'):
+                    self.data['size'][count] *= 0.68
+                elif sym == strToSym('Br'+SUPNEG):
+                    self.data['size'][count] *= 0.55
+                elif sym == strToSym('Br'+SUPTWO):
+                    self.data['size'][count] *= 0.55
+
+            for ti in range(self.n_bonds):
+                self.data['adj'][ti] = [self.n_atoms + 2*ti,
+                                        self.n_atoms + 1 + 2*ti]
+
         self.setTexts(self.text)
         self.updateGraph()
 
@@ -56,6 +97,17 @@ def LinInterp(p, q, t):
     Note that r(0)=p, and r(1)=q."""
     r = t*p + (1 - t)*q
     return r
+
+
+def generate_bond_nodes(point1, point2):
+    new1 = np.zeros((2,), dtype=float)
+    new2 = np.zeros((2,), dtype=float)
+
+    percent_offset = 0.35
+    new1 = LinInterp(point1, point2, percent_offset)
+    new2 = LinInterp(point1, point2, 1 - percent_offset)
+
+    return new1, new2
 
 
 def strToSym(string):
@@ -131,7 +183,7 @@ class CO2(Chemical):
 
     def get_edges(self):
         return np.array([
-                        [0, 2],
+                        [0, 1],
                         [1, 2],
                         ])
 
@@ -250,7 +302,7 @@ class Br(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        sym = [strToSym('Br-')]
+        sym = [strToSym('Br'+SUPNEG)]
 
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True)
@@ -468,7 +520,7 @@ class Br2(Chemical):
 
         pos = self.get_positions()
         adj = self.get_edges()
-        sym = [strToSym('Br-')]
+        sym = [strToSym('Br'+SUPTWO)]
 
         self.setData(pos=pos, adj=adj, pxMode=False,
                      symbol=sym, antialias=True)
