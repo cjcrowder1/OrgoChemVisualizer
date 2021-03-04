@@ -324,20 +324,20 @@ class C4H9Br(Chemical):
                      symbol=sym, antialias=True)
     def get_positions(self):
         return np.array([
-                        [-8, 7], 
-                        [-9, 8],
-                        [-8, 9], 
-                        [-8, 8], 
-                        [-7, 8], 
-                        [-7, 9],
-                        [-7, 7],
-                        [-6, 8],
-                        [-6, 7], 
-                        [-6, 9],
-                        [-5, 8],
-                        [-5, 7],
-                        [-5, 9],
-                        [-4, 8],
+                        [-8, 17], 
+                        [-9, 18],
+                        [-8, 19], 
+                        [-8, 18], 
+                        [-7, 18], 
+                        [-7, 19],
+                        [-7, 17],
+                        [-6, 18],
+                        [-6, 17], 
+                        [-6, 19],
+                        [-5, 18],
+                        [-5, 17],
+                        [-5, 19],
+                        [-4, 18],
                         ], dtype=float)
     def get_edges(self):
         return np.array([
@@ -483,3 +483,240 @@ class Br2(Chemical):
                         [0, 0],
                         ])
 
+
+class C2H5OH(Chemical):
+    def __init__(self):
+        super(C2H5OH, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('H'), 
+                strToSym('C'), strToSym('C'), strToSym('H'), 
+                strToSym('H'), strToSym('O'), strToSym('H')]
+        
+        self.setData(pos=pos, adj=adj, pxMode=False, 
+                     symbol=sym, antialias=True)
+    
+    def get_positions(self):
+        return np.array([
+                        [-8, 5],
+                        [-9, 6],
+                        [-8, 7],
+                        [-8, 6],
+                        [-7, 6],
+                        [-7, 5],
+                        [-7, 7],
+                        [-6, 6],
+                        [-5, 6]
+                        ], dtype=float)
+    
+    def get_edges(self):
+        return np.array([
+                        [0, 3], 
+                        [1, 3],
+                        [2, 3],
+                        [3, 4],
+                        [5, 4], 
+                        [6, 4], 
+                        [4, 7], 
+                        [7, 8],
+                        ])
+
+class H2SO4(Chemical):
+    def __init__(self):
+        super(H2SO4, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('O'), strToSym('S'), 
+                strToSym('O'), strToSym('O'), strToSym('O'), 
+                strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False, 
+                     symbol=sym, antialias=True)
+
+    def get_positions(self):
+        return np.array([
+                        [-6, 7.5], 
+                        [-6, 8.5],
+                        [-5, 9.5],
+                        [-6, 10.5],
+                        [-4, 10.5],
+                        [-4, 8.5],
+                        [-4, 7.5],
+                        ], dtype=float)
+    
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                        [1, 2],
+                        [3, 2],
+                        [4, 2],
+                        [5, 2],
+                        [6, 5],
+                        ])
+
+#Needs plus sign
+class C2H5OH2(Chemical):
+    def __init__(self):
+        super(C2H5OH2, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('H'), 
+                strToSym('C'), strToSym('C'), strToSym('H'), 
+                strToSym('H'), strToSym('O'), strToSym('H'),
+                strToSym('H')]
+        
+        self.setData(pos=pos, adj=adj, pxMode=False, 
+                     symbol=sym, antialias=True)
+    
+    def get_positions(self):
+        return np.array([
+                        [-1, 5],
+                        [-2, 6],
+                        [-1, 7],
+                        [-1, 6],
+                        [0, 6],
+                        [0, 5],
+                        [0, 7],
+                        [1, 6],
+                        [2, 6],
+                        [1, 7],
+                        ], dtype=float)
+    
+    def get_edges(self):
+        return np.array([
+                        [0, 3], 
+                        [1, 3],
+                        [2, 3],
+                        [3, 4],
+                        [5, 4], 
+                        [6, 4], 
+                        [4, 7], 
+                        [7, 8],
+                        [7, 9],
+                        ])
+
+#Needs minus sign
+class HSO4(Chemical):
+    def __init__(self):
+        super(HSO4, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('O'), strToSym('S'), strToSym('O'), 
+               strToSym('O'), strToSym('O'), strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False, 
+                     symbol=sym, antialias=True)
+
+    def get_positions(self):
+        return np.array([ 
+                        [1, 8.5],
+                        [2, 9.5],
+                        [1, 10.5],
+                        [3, 10.5],
+                        [3, 8.5],
+                        [3, 7.5],
+                        ], dtype=float)
+    
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                        [2, 1],
+                        [3, 1],
+                        [4, 1],
+                        [5, 4],
+                        ])                       
+
+#Needs a double bond
+class C2H4(Chemical):
+    def __init__(self):
+        super(C2H4, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('C'), 
+               strToSym('C'), strToSym('H'), strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False, 
+                     symbol=sym, antialias=True)
+
+    def get_positions(self):
+        return np.array([
+                        [6, 5],
+                        [6, 7],
+                        [7, 6],
+                        [8, 6],
+                        [9, 5],
+                        [9, 7],
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 2],
+                        [1, 2],
+                        [2, 3],
+                        [4, 3],
+                        [5, 3],
+                        ])
+
+class H2SO4f(Chemical):
+    def __init__(self):
+        super(H2SO4f, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('O'), strToSym('S'), 
+                strToSym('O'), strToSym('O'), strToSym('O'), 
+                strToSym('H')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False, 
+                     symbol=sym, antialias=True)
+
+    def get_positions(self):
+        return np.array([
+                        [7, 7.5], 
+                        [7, 8.5],
+                        [8, 9.5],
+                        [7, 10.5],
+                        [9, 10.5],
+                        [9, 8.5],
+                        [9, 7.5],
+                        ], dtype=float)
+    
+    def get_edges(self):
+        return np.array([
+                        [0, 1],
+                        [1, 2],
+                        [3, 2],
+                        [4, 2],
+                        [5, 2],
+                        [6, 5],
+                        ])
+
+
+class H2Of(Chemical):
+    def __init__(self):
+        super(H2Of, self).__init__()
+
+        pos = self.get_positions()
+        adj = self.get_edges()
+        sym = [strToSym('H'), strToSym('H'), strToSym('O')]
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, antialias=True, pen=pg.mkPen('w'))
+
+    def get_positions(self):
+        return np.array([
+                        [10, 5],
+                        [12, 6],
+                        [11, 5],
+                        ], dtype=float)
+
+    def get_edges(self):
+        return np.array([
+                        [0, 2],
+                        [1, 2],
+                        ])

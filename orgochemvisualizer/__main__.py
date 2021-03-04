@@ -41,6 +41,13 @@ class AnimationViewer(pg.GraphicsView):
         mol11 = ca.C3H7()
         mol12 = ca.CH3OH()
         mol13 = ca.Br2()
+        mol14 = ca.C2H5OH()
+        mol15 = ca.H2SO4()
+        mol16 = ca.C2H5OH2()
+        mol17 = ca.HSO4()
+        mol18 = ca.C2H4()
+        mol19 = ca.H2SO4f()
+        mol20 = ca.H2Of()
 
         self.addItem(mol1)
         self.addItem(mol2)
@@ -55,6 +62,13 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(mol11)
         self.addItem(mol12)
         self.addItem(mol13)
+        self.addItem(mol14)
+        self.addItem(mol15)
+        self.addItem(mol16)
+        self.addItem(mol17)
+        self.addItem(mol18)
+        self.addItem(mol19)
+        self.addItem(mol20)
 
 #Initial animation for H2O
         self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
@@ -121,6 +135,83 @@ class AnimationViewer(pg.GraphicsView):
         self.R1S3.setEndValue(QtCore.QPointF(-2.5, 1))
 
         self.R1S3.start()
+
+#Initial animation for C2H5OH
+        self.R3S2 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S2.setDuration(8000)
+        self.R3S2.setStartValue(QtCore.QPointF(0, -13))
+
+        self.R3S2.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+
+        self.R3S2.setEndValue(QtCore.QPointF(0, -13))
+
+        self.R3S2.start()
+
+#Initial animation for H2SO4
+        self.R3S3 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S3.setDuration(8000)
+        self.R3S3.setStartValue(QtCore.QPointF(0, 0))
+
+        self.R3S3.setKeyValueAt(0.3, QtCore.QPointF(1, 1))
+
+        self.R3S3.setEndValue(QtCore.QPointF(1, 1))
+
+        self.R3S3.start()
+
+#Initial animation for C2H5OH2
+        self.R3S4 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S4.setDuration(8000)
+        self.R3S4.setStartValue(QtCore.QPointF(0, -13))
+
+        self.R3S4.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+
+        self.R3S4.setEndValue(QtCore.QPointF(0, -13))
+
+        self.R3S4.start()
+
+#Initial animation for HSO4
+        self.R3S5 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S5.setDuration(8000)
+        self.R3S5.setStartValue(QtCore.QPointF(0, -13))
+
+        self.R3S5.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+
+        self.R3S5.setEndValue(QtCore.QPointF(0, -13))
+
+        self.R3S5.start()
+
+#Initial animation for C2H4
+        self.R3S6 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S6.setDuration(8000)
+        self.R3S6.setStartValue(QtCore.QPointF(0, -13))
+
+        self.R3S6.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+
+        self.R3S6.setEndValue(QtCore.QPointF(0, -13))
+
+        self.R3S6.start()
+
+#Initial animation for second H2SO4
+        self.R3S7 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S7.setDuration(8000)
+        self.R3S7.setStartValue(QtCore.QPointF(0, -13))
+
+        self.R3S7.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+
+        self.R3S7.setEndValue(QtCore.QPointF(0, -13))
+
+        self.R3S7.start()
+
+#Initial animation for H2O product
+        self.R3S8 = QtCore.QPropertyAnimation(mol1, b'pos')
+        self.R3S8.setDuration(8000)
+        self.R3S8.setStartValue(QtCore.QPointF(0, -13))
+
+        self.R3S8.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+
+        self.R3S8.setEndValue(QtCore.QPointF(0, -13))
+
+        self.R3S8.start()
 
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
