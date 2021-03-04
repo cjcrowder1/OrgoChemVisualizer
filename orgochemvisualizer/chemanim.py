@@ -21,6 +21,10 @@ class Chemical(pg.GraphItem):
     2-item numpy 1D-array.
 
     Right now only assumes single bonds.
+
+    Need to add in double bonds
+
+    Would be nice to adjust for size of shape by storing number of 
     """
 
     def __init__(self):
