@@ -70,6 +70,14 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(mol19)
         self.addItem(mol20)
 
+        # testing text box
+        example_text = "This is a text. I wonder what this will look like."
+        step = 2
+        posX = -3
+        posY = -5
+        text1 = ca.TextItem(example_text, posX, posY, step=step)
+        self.addItem(text1)
+
 #Initial animation for H2O
         self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
         self.R3S1.setDuration(8000)

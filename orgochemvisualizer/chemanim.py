@@ -9,12 +9,13 @@ nice to add in skeletal formula for more typical orgo representations
 
 import numpy as np
 import pyqtgraph as pg
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtGui
 
 # see https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts
 # \u2009 is a 'thin space' character that makes it easier to see superscript
 SUPNEG = '\u2009'+'\u207B'
 SUPTWO = '\u2009'+'\u00B2'
+
 
 class Chemical(pg.GraphItem):
     """ Class for drawing chemicals. Initial position is a
@@ -112,6 +113,38 @@ def generate_bond_nodes(point1, point2):
     new2 = LinInterp(point1, point2, 1 - percent_offset)
 
     return new1, new2
+
+
+class TextItem(pg.TextItem):
+    """Custom TextItem class to provide consistent style.
+
+    Takes 3 arguments: text, posX and posY. posX and posY refer
+    to the location of the center (as of right now. Can use
+    `anchor` argument to change this)."""
+    def __init__(self, text, posX=0, posY=0, step=None):
+        pen = pg.mkPen(cosmetic=True, width=1, color='w', size=0.01)
+        brush = pg.mkBrush(50, 50, 50, 100)
+        super(TextItem, self).__init__(border=pen, fill=brush,
+                                       anchor=(0.5, 0.5))
+
+        font = QtGui.QFont()
+        size = 12
+        font.setPointSize(size)
+
+        print(self.boundingRect())
+
+        printText = ""
+        if step is not None:
+            printText += "<u>Step " + str(step) + "</u>:<br>"
+        printText += text
+        print(printText)
+        self.setHtml(printText)
+        self.setPos(posX, posY)
+        self.setFont(font)
+
+        sizeScale = 0.05
+        self.setScale(sizeScale)
+        self.setTextWidth(200)
 
 
 def strToSym(string):
@@ -321,8 +354,10 @@ class Br(Chemical):
                         [0, 0],
                         ])
 
-#this is in line format, could also do a more simplified format of the molecule
+
 class C3H7Br(Chemical):
+    """this is in line format, could also do a more simplified format of the molecule"""
+
     def __init__(self):
         super(C3H7Br, self).__init__()
 
@@ -412,6 +447,7 @@ class C4H9Br(Chemical):
                         [13, 10],
                         ])
 
+
 class H3O(Chemical):
     def __init__(self):
         super(H3O, self).__init__()
@@ -438,8 +474,9 @@ class H3O(Chemical):
                         [2, 3],
                         ])
 
-#alkene needs double bond
+
 class C3H6(Chemical):
+    """alkene needs double bond"""
     def __init__(self):
         super(C3H6, self).__init__()
 
@@ -477,8 +514,9 @@ class C3H6(Chemical):
                         [8, 6],
                         ])
 
-#needs a + charge
+
 class C3H7(Chemical):
+    """#needs a + charge"""
     def __init__(self):
         super(C3H7, self).__init__()
 
@@ -517,6 +555,7 @@ class C3H7(Chemical):
                         [8, 6],
                         [9, 6],
                         ])
+
 
 class Br2(Chemical):
     def __init__(self):
@@ -578,6 +617,7 @@ class C2H5OH(Chemical):
                         [7, 8],
                         ])
 
+
 class H2SO4(Chemical):
     def __init__(self):
         super(H2SO4, self).__init__()
@@ -612,8 +652,9 @@ class H2SO4(Chemical):
                         [6, 5],
                         ])
 
-#Needs plus sign
+
 class C2H5OH2(Chemical):
+    """#Needs plus sign"""
     def __init__(self):
         super(C2H5OH2, self).__init__()
 
@@ -654,8 +695,9 @@ class C2H5OH2(Chemical):
                         [7, 9],
                         ])
 
-#Needs minus sign
+
 class HSO4(Chemical):
+    """#Needs minus sign"""
     def __init__(self):
         super(HSO4, self).__init__()
 
@@ -686,8 +728,9 @@ class HSO4(Chemical):
                         [5, 4],
                         ])                       
 
-#Needs a double bond
+
 class C2H4(Chemical):
+    """#Needs a double bond"""
     def __init__(self):
         super(C2H4, self).__init__()
 
@@ -717,6 +760,7 @@ class C2H4(Chemical):
                         [4, 3],
                         [5, 3],
                         ])
+
 
 class H2SO4f(Chemical):
     def __init__(self):
