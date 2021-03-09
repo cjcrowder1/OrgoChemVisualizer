@@ -78,6 +78,29 @@ class AnimationViewer(pg.GraphicsView):
         text1 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text1)
 
+        # testing animated arrow
+        #p1 = pg.plot()
+        #c = p1.plot(x=np.sin(np.linspace(0, 2*np.pi, 1000)), y=np.cos(np.linspace(0, 6*np.pi, 1000)))
+        #a = pg.CurveArrow(c)
+        #a.setStyle(headLen=20)
+        #self.addItem(a)
+        #anim = a.makeAnimation(loop=-1)
+        #anim.start()
+
+        self.arrow = ca.CurveArrow(0, -2, 5, -3)
+        self.addItem(self.arrow.plot)
+        self.arrow.start()
+
+
+        #arrow = pg.ArrowItem()
+        #self.addItem(arrow)
+        #arrow_anim = QtCore.QPropertyAnimation(arrow, b'Pos')
+        #arrow_anim.setDuration(8000)
+        #arrow_anim.setStartValue(QtCore.QPointF(0, -13))
+        #arrow_anim.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+        #arrow_anim.setEndValue(QtCore.QPointF(0, -13))
+        #arrow_anim.start()
+
 #Initial animation for H2O
         self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
         self.R3S1.setDuration(8000)

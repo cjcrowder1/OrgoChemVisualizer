@@ -115,6 +115,30 @@ def generate_bond_nodes(point1, point2):
     return new1, new2
 
 
+class CurveArrow(pg.CurveArrow):
+    """Custom CurveArrow class to provide consistent style.
+
+    Arrow points from (pos0X, pos0Y) to (pos1X, pos1Y).
+
+    Right now is along straight line. In future will travel along curve.
+
+    Example:
+    >>> arrow = ca.CurveArrow(0, 0, 5, 0)
+    >>> addItem(arrow.plot)
+    >>> arrow.start()
+    """
+    def __init__(self, pos0X, pos0Y, pos1X, pos1Y):
+        self.plot = pg.PlotDataItem(x=np.linspace(pos0X, pos1X, 100),
+                                    y=np.linspace(pos0Y, pos1Y, 100),
+                                    pen=pg.mkPen('r'))
+        super(CurveArrow, self).__init__(self.plot)
+        self.setStyle(headLen=40)
+        self.anim = self.makeAnimation(loop=-1, duration=1000)
+
+    def start(self):
+        self.anim.start()
+
+
 class TextItem(pg.TextItem):
     """Custom TextItem class to provide consistent style.
 
@@ -131,13 +155,10 @@ class TextItem(pg.TextItem):
         size = 12
         font.setPointSize(size)
 
-        print(self.boundingRect())
-
         printText = ""
         if step is not None:
             printText += "<u>Step " + str(step) + "</u>:<br>"
         printText += text
-        print(printText)
         self.setHtml(printText)
         self.setPos(posX, posY)
         self.setFont(font)
