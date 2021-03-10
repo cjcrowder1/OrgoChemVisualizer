@@ -3,8 +3,8 @@
 [![Documentation Status](https://readthedocs.org/projects/orgochemvisualizer/badge/?version=latest)](https://orgochemvisualizer.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.com/cjcrowder1/OrgoChemVisualizer.svg?branch=main)](https://travis-ci.com/cjcrowder1/OrgoChemVisualizer)
 
-# Icon
-![Icon](OrgoCHMicon.png)
+## Icon
+![47d984de31e64f669c95f8e403c3d202](https://user-images.githubusercontent.com/71831387/110709907-fc3a7b00-81ca-11eb-90d0-c10a076c5330.png)
 
 This code is used to visualize chemical reactions from Organic Chemistry. It is intended to be a teaching tool for college students taking undergraduate Organic Chemistry.
 
