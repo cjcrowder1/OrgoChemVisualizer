@@ -63,14 +63,13 @@ E1 Mechanism
 
 An E1 mechanism is also known as an Elimination 1 reaction, in this mechanism 
 two substituents, any atom/group other than Hydrogen on a molecule, are removed.
-This reaction includes an Alkyl Halide, OCH3, and H2O to eliminate the 
-substiuent. For this reaction, the Alkyl Halide is a molecule called: 
-2-bromobutane, so the substituent is Bromine.  The first step of this reaction
-is the breaking of the bond between Carbon and Bromine, because Bromine is a good
-Leaving Group, as are all halide ions, which leaves that Carbon with a positive 
-charge. Due to the positive charge on the Carbon, the bond between the Hydrogen 
-and the Carbon, the one with the methyl group, is broken to neutralize the positve
-Carbon with a double bond, C=C. Simultaneously, the Oxygen in the  OCH3 molecule 
-bonds with the detaching Hydrogen, forming H3O+, also known as the hydronium ion.
-This elimination mechanism results with the products: 1,2-dimethylcyclohexene, 
-H3O+, and Br-.
+This reaction includes an alcohol and H2SO4 to eliminate the 
+oxygen from the molecule, and eventually forming an alkene. For this reaction, the 
+alcohol is a molecule called: ethanol and the alkene formed from this reaction is ethanol.  
+The first step of this reaction is the protonation of the alcohol which is achieved when 
+the lone pairs of elections on the oxygen picks up a hydrogen ion from the sulphuric acid (H2SO4),
+the -OH group then becomes -OH2 with the addition of the hydrogen ion.  In the next step, the
+H2O leaves the molecule because it is a good leaving group, this forms a carbocation.  The carbocation
+molecule experiences the removal of a hydrogen ion in order to form a double bond between the two Carbons, 
+and forming ethene (CH2=CH2).
+
