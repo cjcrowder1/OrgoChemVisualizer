@@ -66,6 +66,7 @@ two substituents, any atom/group other than Hydrogen on a molecule, are removed.
 This reaction includes an alcohol and H2SO4 to eliminate the 
 oxygen from the molecule, and eventually forming an alkene. For this reaction, the 
 alcohol is a molecule called: ethanol and the alkene formed from this reaction is ethanol.  
+This reaction is also known as the dehydration of ethanol.
 The first step of this reaction is the protonation of the alcohol which is achieved when 
 the lone pairs of elections on the oxygen picks up a hydrogen ion from the sulphuric acid (H2SO4),
 the -OH group then becomes -OH2 with the addition of the hydrogen ion.  In the next step, the
