@@ -288,6 +288,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__()
 
         self.setWindowTitle('OrgoChemVisualizer')
+        self.setWindowIcon(QtGui.QIcon("images/icon.png"))
         self.resize(800, 600)
 
         self.av = AnimationViewer()
