@@ -28,47 +28,49 @@ class AnimationViewer(pg.GraphicsView):
         self.setRange(rect)
         #self.setAspectLocked(True)
 
-        mol1 = ca.H2O()
-        mol2 = ca.CO2()
-        mol3 = ca.HBr()
-        mol4 = ca.CH3Br()
-        mol5 = ca.OH()
-        mol6 = ca.Br()
-        mol7 = ca.C3H7Br()
-        mol8 = ca.C4H9Br()
-        mol9 = ca.H3O()
-        mol10 = ca.C3H6()
-        mol11 = ca.C3H7()
-        mol12 = ca.CH3OH()
-        mol13 = ca.Br2()
-        mol14 = ca.C2H5OH()
-        mol15 = ca.H2SO4()
-        mol16 = ca.C2H5OH2()
-        mol17 = ca.HSO4()
-        mol18 = ca.C2H4()
-        mol19 = ca.H2SO4f()
-        mol20 = ca.H2Of()
+        #self.scene = self.scene
 
-        self.addItem(mol1)
-        self.addItem(mol2)
-        self.addItem(mol3)
-        self.addItem(mol4)
-        self.addItem(mol5)
-        self.addItem(mol6)
-        self.addItem(mol7)
-        self.addItem(mol8)
-        self.addItem(mol9)
-        self.addItem(mol10)
-        self.addItem(mol11)
-        self.addItem(mol12)
-        self.addItem(mol13)
-        self.addItem(mol14)
-        self.addItem(mol15)
-        self.addItem(mol16)
-        self.addItem(mol17)
-        self.addItem(mol18)
-        self.addItem(mol19)
-        self.addItem(mol20)
+        #self.mol1 = ca.H2O()
+        #self.mol2 = ca.CO2()
+        #self.mol3 = ca.HBr()
+        #self.mol4 = ca.CH3Br()
+        #self.mol5 = ca.OH()
+        #self.mol6 = ca.Br()
+        #self.mol7 = ca.C3H7Br()
+        #self.mol8 = ca.C4H9Br()
+        #self.mol9 = ca.H3O()
+        #self.mol10 = ca.C3H6()
+        #self.mol11 = ca.C3H7()
+        #self.mol12 = ca.CH3OH()
+        #self.mol13 = ca.Br2()
+        #self.mol14 = ca.C2H5OH()
+        #self.mol15 = ca.H2SO4()
+        #self.mol16 = ca.C2H5OH2()
+        #self.mol17 = ca.HSO4()
+        #self.mol18 = ca.C2H4()
+        #self.mol19 = ca.H2SO4f()
+        #self.mol20 = ca.H2Of()
+
+        #self.addItem(mol1)
+        #self.addItem(mol2)
+        #self.addItem(mol3)
+        #self.addItem(mol4)
+        #self.addItem(mol5)
+        #self.addItem(mol6)
+        #self.addItem(mol7)
+        #self.addItem(mol8)
+        #self.addItem(mol9)
+        #self.addItem(mol10)
+        #self.addItem(mol11)
+        #self.addItem(mol12)
+        #self.addItem(mol13)
+        #self.addItem(mol14)
+        #self.addItem(mol15)
+        #self.addItem(mol16)
+        #self.addItem(mol17)
+        #self.addItem(mol18)
+        #self.addItem(mol19)
+        #self.addItem(mol20)
 
         # testing text box
         example_text = "This is a text. I wonder what this will look like."
@@ -79,170 +81,158 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(text1)
 
         # testing animated arrow
-        #p1 = pg.plot()
-        #c = p1.plot(x=np.sin(np.linspace(0, 2*np.pi, 1000)), y=np.cos(np.linspace(0, 6*np.pi, 1000)))
-        #a = pg.CurveArrow(c)
-        #a.setStyle(headLen=20)
-        #self.addItem(a)
-        #anim = a.makeAnimation(loop=-1)
-        #anim.start()
-
         self.arrow = ca.CurveArrow(0, -2, 5, -3)
         self.addItem(self.arrow.plot)
-        self.arrow.start()
+        #self.arrow.start()
 
+    def show_reaction(self, name):
+        self.sceneObj.clear()
+        #self.scene.clear()
 
-        #arrow = pg.ArrowItem()
-        #self.addItem(arrow)
-        #arrow_anim = QtCore.QPropertyAnimation(arrow, b'Pos')
-        #arrow_anim.setDuration(8000)
-        #arrow_anim.setStartValue(QtCore.QPointF(0, -13))
-        #arrow_anim.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-        #arrow_anim.setEndValue(QtCore.QPointF(0, -13))
-        #arrow_anim.start()
+        if name == "reaction1":
+            mol3 = ca.HBr()
+            mol13 = ca.Br2()
+            self.addItem(mol3)
+            self.addItem(mol13)
 
-#Initial animation for H2O
-        self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S1.setDuration(8000)
-        self.R3S1.setStartValue(QtCore.QPointF(0, -13))
+            print("reaction 1 was pressed!")
+            #Initial animation for HBr
+            self.R1S2 = QtCore.QPropertyAnimation(mol3, b'pos')
+            self.R1S2.setDuration(8000)
+            self.R1S2.setStartValue(QtCore.QPointF(0, 0))
+            self.R1S2.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+            self.R1S2.setEndValue(QtCore.QPointF(0, 0))
+            self.R1S2.start()
 
-        self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
+            #Initial animation for Br-
+            self.R1S3 = QtCore.QPropertyAnimation(mol13, b'pos')
+            self.R1S3.setDuration(8000)
+            self.R1S3.setStartValue(QtCore.QPointF(0, 0))
+            self.R1S3.setKeyValueAt(0.3, QtCore.QPointF(-2.5, 1))
+            self.R1S3.setEndValue(QtCore.QPointF(-2.5, 1))
+            self.R1S3.start()
 
-        self.R3S1.setEndValue(QtCore.QPointF(0, -13))
+        elif name == "reaction2":
+            mol4 = ca.CH3Br()
+            mol5 = ca.OH()
+            mol12 = ca.CH3OH()
+            self.addItem(mol4)
+            self.addItem(mol5)
+            self.addItem(mol12)
 
-        self.R3S1.start()
+            print("reaction 2 was pressed!")
+            #Initial animation for CH3Br
+            self.R2S1 = QtCore.QPropertyAnimation(mol4, b'pos')
+            self.R2S1.setDuration(8000)
+            self.R2S1.setStartValue(QtCore.QPointF(0, 0))
+            self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+            self.R2S1.setEndValue(QtCore.QPointF(0, 0))
+            self.R2S1.start()
 
-#Initial animation for CH3Br
-        self.R2S1 = QtCore.QPropertyAnimation(mol4, b'pos')
-        self.R2S1.setDuration(8000)
-        self.R2S1.setStartValue(QtCore.QPointF(0, 0))
+            #Initial animation for OH-
+            self.R2S2 = QtCore.QPropertyAnimation(mol5, b'pos')
+            self.R2S2.setDuration(8000)
+            self.R2S2.setStartValue(QtCore.QPointF(0, 0))
+            self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
+            self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
+            self.R2S2.start()
 
-        self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+            #Initial animation for CH3OH
+            self.R2S3 = QtCore.QPropertyAnimation(mol12, b'pos')
+            self.R2S3.setDuration(8000)
+            self.R2S3.setStartValue(QtCore.QPointF(0, 0))
+            self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+            self.R2S3.setEndValue(QtCore.QPointF(0, 0))
+            self.R2S3.start()
 
-        self.R2S1.setEndValue(QtCore.QPointF(0, 0))
+        elif name == "reaction3":
+            mol1 = ca.H2O()
+            mol14 = ca.C2H5OH()
+            mol15 = ca.H2SO4()
+            mol16 = ca.C2H5OH2()
+            mol17 = ca.HSO4()
+            mol18 = ca.C2H4()
+            mol19 = ca.H2SO4f()
+            mol20 = ca.H2Of()
 
-        self.R2S1.start()
+            self.addItem(mol1)
+            self.addItem(mol14)
+            self.addItem(mol15)
+            self.addItem(mol16)
+            self.addItem(mol17)
+            self.addItem(mol18)
+            self.addItem(mol19)
+            self.addItem(mol20)
 
-#Initial animation for OH-
-        self.R2S2 = QtCore.QPropertyAnimation(mol5, b'pos')
-        self.R2S2.setDuration(8000)
-        self.R2S2.setStartValue(QtCore.QPointF(0, 0))
+            print("reaction 3 was pressed!")
 
-        self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
+            #Initial animation for H2O
+            self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
+            self.R3S1.setDuration(8000)
+            self.R3S1.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S1.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S1.start()
 
-        self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
+            #Initial animation for C2H5OH
+            self.R3S2 = QtCore.QPropertyAnimation(mol14, b'pos')
+            self.R3S2.setDuration(8000)
+            self.R3S2.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S2.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S2.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S2.start()
 
-        self.R2S2.start() 
+            #Initial animation for H2SO4
+            self.R3S3 = QtCore.QPropertyAnimation(mol15, b'pos')
+            self.R3S3.setDuration(8000)
+            self.R3S3.setStartValue(QtCore.QPointF(0, 0))
+            self.R3S3.setKeyValueAt(0.3, QtCore.QPointF(1, 1))
+            self.R3S3.setEndValue(QtCore.QPointF(1, 1))
+            self.R3S3.start()
 
-#Initial animation for CH3OH
-        self.R2S3 = QtCore.QPropertyAnimation(mol12, b'pos')
-        self.R2S3.setDuration(8000)
-        self.R2S3.setStartValue(QtCore.QPointF(0, 0))
+            #Initial animation for C2H5OH2
+            self.R3S4 = QtCore.QPropertyAnimation(mol16, b'pos')
+            self.R3S4.setDuration(8000)
+            self.R3S4.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S4.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S4.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S4.start()
 
-        self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+            #Initial animation for HSO4
+            self.R3S5 = QtCore.QPropertyAnimation(mol17, b'pos')
+            self.R3S5.setDuration(8000)
+            self.R3S5.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S5.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S5.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S5.start()
 
-        self.R2S3.setEndValue(QtCore.QPointF(0, 0))
+            #Initial animation for C2H4
+            self.R3S6 = QtCore.QPropertyAnimation(mol18, b'pos')
+            self.R3S6.setDuration(8000)
+            self.R3S6.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S6.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S6.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S6.start()
 
-        self.R2S3.start()
+            #Initial animation for second H2SO4
+            self.R3S7 = QtCore.QPropertyAnimation(mol19, b'pos')
+            self.R3S7.setDuration(8000)
+            self.R3S7.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S7.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S7.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S7.start()
 
-#Initial animation for HBr
-        self.R1S2 = QtCore.QPropertyAnimation(mol3, b'pos')
-        self.R1S2.setDuration(8000)
-        self.R1S2.setStartValue(QtCore.QPointF(0, 0))
+            #Initial animation for H2O product
+            self.R3S8 = QtCore.QPropertyAnimation(mol20, b'pos')
+            self.R3S8.setDuration(8000)
+            self.R3S8.setStartValue(QtCore.QPointF(0, -0))
+            self.R3S8.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
+            self.R3S8.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S8.start()
 
-        self.R1S2.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        else:
+            print(f"Error: {name} reaction name not recognized.")
 
-        self.R1S2.setEndValue(QtCore.QPointF(0, 0))
-
-        self.R1S2.start()
-
-#Initial animation for Br-
-        self.R1S3 = QtCore.QPropertyAnimation(mol13, b'pos')
-        self.R1S3.setDuration(8000)
-        self.R1S3.setStartValue(QtCore.QPointF(0, 0))
-
-        self.R1S3.setKeyValueAt(0.3, QtCore.QPointF(-2.5, 1))
-
-        self.R1S3.setEndValue(QtCore.QPointF(-2.5, 1))
-
-        self.R1S3.start()
-
-#Initial animation for C2H5OH
-        self.R3S2 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S2.setDuration(8000)
-        self.R3S2.setStartValue(QtCore.QPointF(0, -13))
-
-        self.R3S2.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-
-        self.R3S2.setEndValue(QtCore.QPointF(0, -13))
-
-        self.R3S2.start()
-
-#Initial animation for H2SO4
-        self.R3S3 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S3.setDuration(8000)
-        self.R3S3.setStartValue(QtCore.QPointF(0, 0))
-
-        self.R3S3.setKeyValueAt(0.3, QtCore.QPointF(1, 1))
-
-        self.R3S3.setEndValue(QtCore.QPointF(1, 1))
-
-        self.R3S3.start()
-
-#Initial animation for C2H5OH2
-        self.R3S4 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S4.setDuration(8000)
-        self.R3S4.setStartValue(QtCore.QPointF(0, -13))
-
-        self.R3S4.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-
-        self.R3S4.setEndValue(QtCore.QPointF(0, -13))
-
-        self.R3S4.start()
-
-#Initial animation for HSO4
-        self.R3S5 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S5.setDuration(8000)
-        self.R3S5.setStartValue(QtCore.QPointF(0, -13))
-
-        self.R3S5.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-
-        self.R3S5.setEndValue(QtCore.QPointF(0, -13))
-
-        self.R3S5.start()
-
-#Initial animation for C2H4
-        self.R3S6 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S6.setDuration(8000)
-        self.R3S6.setStartValue(QtCore.QPointF(0, -13))
-
-        self.R3S6.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-
-        self.R3S6.setEndValue(QtCore.QPointF(0, -13))
-
-        self.R3S6.start()
-
-#Initial animation for second H2SO4
-        self.R3S7 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S7.setDuration(8000)
-        self.R3S7.setStartValue(QtCore.QPointF(0, -13))
-
-        self.R3S7.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-
-        self.R3S7.setEndValue(QtCore.QPointF(0, -13))
-
-        self.R3S7.start()
-
-#Initial animation for H2O product
-        self.R3S8 = QtCore.QPropertyAnimation(mol1, b'pos')
-        self.R3S8.setDuration(8000)
-        self.R3S8.setStartValue(QtCore.QPointF(0, -13))
-
-        self.R3S8.setKeyValueAt(0.3, QtCore.QPointF(0, -13))
-
-        self.R3S8.setEndValue(QtCore.QPointF(0, -13))
-
-        self.R3S8.start()
 
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
@@ -255,7 +245,7 @@ class ReactionSelection(QtWidgets.QWidget):
         self.viewSN2Radio = QtGui.QRadioButton("SN2")
         self.viewE1Radio = QtGui.QRadioButton("E1")
 
-        self.viewHBrRadio.setChecked(True)
+        #self.viewHBrRadio.setChecked(True)
 
         layout.addWidget(reaction_label)
         layout.addWidget(self.viewHBrRadio)
@@ -301,6 +291,13 @@ class MainWindow(QtWidgets.QMainWindow):
         main_widget = QtWidgets.QWidget()
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
+
+        self.set.rs.viewHBrRadio.toggled.connect(
+            lambda: self.av.show_reaction("reaction1"))
+        self.set.rs.viewSN2Radio.toggled.connect(
+            lambda: self.av.show_reaction("reaction2"))
+        self.set.rs.viewE1Radio.toggled.connect(
+            lambda: self.av.show_reaction("reaction3"))
 
 
 def main():

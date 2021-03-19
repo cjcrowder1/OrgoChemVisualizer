@@ -798,7 +798,7 @@ class H2SO4f(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [7, 7.5], 
+                        [7, 7.5],
                         [7, 8.5],
                         [8, 9.5],
                         [7, 10.5],
@@ -806,7 +806,7 @@ class H2SO4f(Chemical):
                         [9, 8.5],
                         [9, 7.5],
                         ], dtype=float)
-    
+
     def get_edges(self):
         return np.array([
                         [0, 1],
