@@ -132,7 +132,7 @@ class CurveArrow(pg.CurveArrow):
                                     y=np.linspace(pos0Y, pos1Y, 100),
                                     pen=pg.mkPen('r'))
         super(CurveArrow, self).__init__(self.plot)
-        self.setStyle(headLen=20)
+        self.setStyle(headLen=15)
         self.anim = self.makeAnimation(loop=-1, duration=1000)
 
     def start(self):
@@ -284,10 +284,10 @@ class CH3Br(Chemical):
     def get_positions(self):
         return np.array([
                         [-6, 0],
-                        [-5, 0],
-                        [-4, 0],
-                        [-5, 1],
-                        [-5, -1],
+                        [-4.5, 0],
+                        [-3.5, 0],
+                        [-4.5, 1.5],
+                        [-4.5, -1.5],
                         ], dtype=float)
 
     def get_edges(self):

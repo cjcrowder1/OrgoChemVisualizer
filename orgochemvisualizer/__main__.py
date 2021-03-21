@@ -121,9 +121,11 @@ class AnimationViewer(pg.GraphicsView):
             mol4 = ca.CH3Br()
             mol5 = ca.OH()
             mol12 = ca.CH3OH()
+            mol6 = ca.Br()
             self.addItem(mol4)
             self.addItem(mol5)
             self.addItem(mol12)
+            self.addItem(mol6)
 
             print("reaction 2 was pressed!")
             #Initial animation for CH3Br
@@ -149,6 +151,14 @@ class AnimationViewer(pg.GraphicsView):
             self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
             self.R2S3.setEndValue(QtCore.QPointF(0, 0))
             self.R2S3.start()
+
+            #Initial animation for Br
+            self.R2S4 = QtCore.QPropertyAnimation(mol12, b'pos')
+            self.R2S4.setDuration(8000)
+            self.R2S4.setStartValue(QtCore.QPointF(0, 0))
+            self.R2S4.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+            self.R2S4.setEndValue(QtCore.QPointF(0, 0))
+            self.R2S4.start()           
 
             # testing text box
             example_text = "This is an SN2 reaction with Alkyl Halides involving the nucleophile Hydroxide and the Alkyl Halide Bromomethane."
@@ -191,12 +201,17 @@ class AnimationViewer(pg.GraphicsView):
             self.addItem(text5)
 
             # testing animated arrow
-            self.arrow = ca.CurveArrow(-2.5, 0, 0.5, 0)
+            self.arrow = ca.CurveArrow(-2, 0, 0.5, 0)
             self.addItem(self.arrow.plot)
             #self.arrow.start()
 
             # testing animated arrow
-            self.arrow = ca.CurveArrow(-2.5, 0, 0.5, 0)
+            self.arrow = ca.CurveArrow(-5.25, -0.5, -4.35, -0.10)
+            self.addItem(self.arrow.plot)
+            #self.arrow.start()
+
+            # testing animated arrow
+            self.arrow = ca.CurveArrow(-3.25, 0.75, -2.75, 1)
             self.addItem(self.arrow.plot)
             #self.arrow.start()
 
