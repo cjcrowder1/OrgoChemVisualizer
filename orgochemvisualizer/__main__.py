@@ -85,6 +85,11 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(self.arrow.plot)
         #self.arrow.start()
 
+        # testing animated arrow
+        self.arrow = ca.CurveArrow(0, 3, 0.5, 3)
+        self.addItem(self.arrow.plot)
+        #self.arrow.start()
+
     def show_reaction(self, name):
         self.sceneObj.clear()
         #self.scene.clear()
@@ -131,7 +136,7 @@ class AnimationViewer(pg.GraphicsView):
 
             #Initial animation for OH-
             self.R2S2 = QtCore.QPropertyAnimation(mol5, b'pos')
-            self.R2S2.setDuration(8000)
+            self.R2S2.setDuration(15000)
             self.R2S2.setStartValue(QtCore.QPointF(0, 0))
             self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
             self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
@@ -144,6 +149,57 @@ class AnimationViewer(pg.GraphicsView):
             self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
             self.R2S3.setEndValue(QtCore.QPointF(0, 0))
             self.R2S3.start()
+
+            # testing text box
+            example_text = "This is an SN2 reaction with Alkyl Halides involving the nucleophile Hydroxide and the Alkyl Halide Bromomethane."
+            step = 0
+            posX = -6
+            posY = -9
+            text1 = ca.TextItem(example_text, posX, posY, step=step)
+            self.addItem(text1)
+           
+            # testing text box
+            example_text = "The hydroxide molecule approaches Bromomethane."
+            step = 1
+            posX = -6
+            posY = -4.5
+            text2 = ca.TextItem(example_text, posX, posY, step=step)
+            self.addItem(text2)
+
+            # testing text box
+            example_text = "Since the hydroxide molecule is negatively charged, one of the electron pairs on the Oxygen attacks the positvely charged Carbon."
+            step = 2
+            posX = -6
+            posY = 4
+            text3 = ca.TextItem(example_text, posX, posY, step=step)
+            self.addItem(text3)
+
+            # testing text box
+            example_text = "At the same time as the Oxygen attacks the Carbon and begins forming a new bond, the Carbon-Bromine bond is broken since Bromine is a good leaving group."
+            step = 3
+            posX = -6
+            posY = 8.5
+            text4 = ca.TextItem(example_text, posX, posY, step=step)
+            self.addItem(text4)
+
+            # testing text box
+            example_text = "The final result is a new bond between the Oxygen in the hydroxide group and the Carbon, and a negatively charged Bromide."
+            step = 4
+            posX = 5
+            posY = -4.5
+            text5 = ca.TextItem(example_text, posX, posY, step=step)
+            self.addItem(text5)
+
+            # testing animated arrow
+            self.arrow = ca.CurveArrow(-2.5, 0, 0.5, 0)
+            self.addItem(self.arrow.plot)
+            #self.arrow.start()
+
+            # testing animated arrow
+            self.arrow = ca.CurveArrow(-2.5, 0, 0.5, 0)
+            self.addItem(self.arrow.plot)
+            #self.arrow.start()
+
 
         elif name == "reaction3":
             mol1 = ca.H2O()

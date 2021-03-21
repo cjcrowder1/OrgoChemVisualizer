@@ -132,7 +132,7 @@ class CurveArrow(pg.CurveArrow):
                                     y=np.linspace(pos0Y, pos1Y, 100),
                                     pen=pg.mkPen('r'))
         super(CurveArrow, self).__init__(self.plot)
-        self.setStyle(headLen=40)
+        self.setStyle(headLen=20)
         self.anim = self.makeAnimation(loop=-1, duration=1000)
 
     def start(self):
