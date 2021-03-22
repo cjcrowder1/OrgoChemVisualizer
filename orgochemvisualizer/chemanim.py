@@ -199,7 +199,7 @@ class CurveArrow(pg.CurveArrow):
                                     y=np.linspace(pos0Y, pos1Y, 100),
                                     pen=pg.mkPen('r'))
         super(CurveArrow, self).__init__(self.plot)
-        self.setStyle(headLen=40)
+        self.setStyle(headLen=15)
         self.anim = self.makeAnimation(loop=-1, duration=1000)
 
     def start(self):
@@ -399,17 +399,10 @@ class CH3OH(Chemical):
         adj = self.get_edges()
         sym = [strToSym('H'), strToSym('O'), strToSym('C'),
                strToSym('H'), strToSym('H'), strToSym('H')]
-        bonds = np.array([
-                        'd',
-                        'd',
-                        's',
-                        'd',
-                        's',
-                        ])
+
 
         self.setData(pos=pos, adj=adj, pxMode=False,
-                     symbol=sym, bonds=bonds,
-                     antialias=True)
+                     symbol=sym, antialias=True)
 
     def get_positions(self):
         return np.array([
@@ -804,8 +797,17 @@ class HSO4(Chemical):
         sym = [strToSym('O'), strToSym('S'), strToSym('O'), 
                strToSym('O'), strToSym('O'), strToSym('H')]
 
-        self.setData(pos=pos, adj=adj, pxMode=False, 
-                     symbol=sym, antialias=True)
+        bonds = np.array([
+                        's',
+                        'd',
+                        'd',
+                        's',
+                        's',
+                        ])
+
+        self.setData(pos=pos, adj=adj, pxMode=False,
+                     symbol=sym, bonds=bonds,
+                     antialias=True)
 
     def get_positions(self):
         return np.array([ 

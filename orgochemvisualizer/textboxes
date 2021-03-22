@@ -4,7 +4,7 @@
   # testing text box
         example_text = "This is an SN2 reaction with Alkyl Halides involving the nucleophile Hydroxide and the Alkyl Halide Bromomethane."
         step = 0
-        posX = -3
+        posX = 0
         posY = -5
         text1 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text1)
@@ -12,23 +12,23 @@
   # testing text box
         example_text = "Step 1: The hydroxide molecule approaches Bromomethane."
         step = 1
-        posX = -3
-        posY = -5
+        posX = -6
+        posY = -4.5
         text2 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text2)
 
   # testing text box
         example_text = "Step 2: Since the hydroxide molecule is negatively charged, one of the electron pairs on the Oxygen attacks the positvely charged Carbon."
         step = 2
-        posX = -3
-        posY = -5
+        posX = -6
+        posY = -4.5
         text3 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text3)
 
   # testing text box
         example_text = "Step 3: At the same time as the Oxygen attacks the Carbon and begins forming a new bond, the Carbon-Bromine bond is broken since Bromine is a good leaving group."
         step = 3
-        posX = -3
+        posX = 0
         posY = -5
         text4 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text4)
@@ -36,7 +36,7 @@
   # testing text box
         example_text = "Step 4: The final result is a new bond between the Oxygen in the hydroxide group and the Carbon, and a negatively charged Bromide."
         step = 4
-        posX = -3
-        posY = -5
+        posX = 5
+        posY = -4.5
         text5 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text5)
