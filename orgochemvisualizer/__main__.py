@@ -161,10 +161,17 @@ class AnimationViewer(pg.GraphicsView):
             self.R2S4.start()           
 
             #see textboxes file to add text
+            # testing text box
+            example_text = "This is an SN2 reaction with Alkyl Halides involving the nucleophile Hydroxide and the Alkyl Halide Bromomethane."
+            step = 0
+            posX = 0
+            posY = -5
+            text1 = ca.TextItem(example_text, posX, posY, step=step)
+            self.addItem(text1)
 
             # testing animated arrow
-            # self.arrow = ca.CurveArrow(-2, 0, 0.5, 0)
-            # self.addItem(self.arrow.plot)
+            self.arrow = ca.CurveArrow(-2, 0, 0.5, 0)
+            self.addItem(self.arrow.plot)
             #self.arrow.start()
 
             # testing animated arrow
