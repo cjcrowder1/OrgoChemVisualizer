@@ -209,9 +209,9 @@ class AnimationViewer(pg.GraphicsView):
             #Initial animation for H2O
             self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
             self.R3S1.setDuration(8000)
-            self.R3S1.setStartValue(QtCore.QPointF(0, -0))
-            self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(0, -0))
-            self.R3S1.setEndValue(QtCore.QPointF(0, -0))
+            self.R3S1.setStartValue(QtCore.QPointF(0, -20))
+            self.R3S1.setKeyValueAt(0.3, QtCore.QPointF(0, -20))
+            self.R3S1.setEndValue(QtCore.QPointF(0, -20))
             self.R3S1.start()
 
             #Initial animation for C2H5OH
