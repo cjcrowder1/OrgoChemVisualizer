@@ -40,3 +40,44 @@
         posY = -4.5
         text5 = ca.TextItem(example_text, posX, posY, step=step)
         self.addItem(text5)
+
+######
+
+''This is a file for the textboxes used in the reactions
+''The first boxes will be for reaction 3: E1
+
+  # testing text box
+        example_text = "This is an E1 reaction involving ethanol and sulfuric acid"
+        step = 0
+        posX = 0
+        posY = -5
+        text1 = ca.TextItem(example_text, posX, posY, step=step)
+        self.addItem(text1)
+  
+  # testing text box
+        example_text = "Step 1: One of the electron lone pairs on the oxygen in ethanol picks up
+                        a hydrogen ion from the sulfuric acid.  The alcohol is now said to be protonated."
+        step = 1
+        posX = -6
+        posY = -4.5
+        text2 = ca.TextItem(example_text, posX, posY, step=step)
+        self.addItem(text2)
+
+  # testing text box
+        example_text = "Step 2: Since water is a good leaving group, the OH2 group leaves, and the molecule forms a carboaction. 
+                        This is followed by a removal of a hydrogen ion from the carbocation, to form a double bond."
+        step = 2
+        posX = -6
+        posY = -4.5
+        text3 = ca.TextItem(example_text, posX, posY, step=step)
+        self.addItem(text3)
+
+
+  # testing text box
+        example_text = "Step 3: The final result is a double bond between the two carbon atoms in the molecule, forming ethene.
+                        Water is also formed from this reaciton, and the sulfuric acid is regenerated."
+        step = 3
+        posX = 5
+        posY = -4.5
+        text5 = ca.TextItem(example_text, posX, posY, step=step)
+        self.addItem(text5)
