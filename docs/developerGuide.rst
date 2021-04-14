@@ -38,7 +38,7 @@ If you are a first-time contributer:
   -Push changes
    Use: git push origin [branch name]
 
-   To add new chemicals/molecules for a reaction:
+--To add new chemicals/molecules for a reaction:
    -Navigate to the folder chemanim.py
    -Follow the format below for creating molecules:
    
@@ -72,7 +72,7 @@ If you are a first-time contributer:
 and 
 #self.addItem(mol2)
 
- To create the animations:
+--To create the animations:
  -Navigate to the __main__.py file
  -Make sure the chemical(s)/molecule(s) wanted for the animation and/or reaction have been added to the file
  -Follow the format for the reaction sequences (from the other reactions 1-3)
