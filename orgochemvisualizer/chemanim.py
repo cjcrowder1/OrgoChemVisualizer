@@ -24,6 +24,7 @@ class Chemical(pg.GraphItem):
 
     def __init__(self):
         self.textItems = []
+        self.center = QtCore.QPointF(0, 0)
 
         # for some reason this super init has to be below
         # the above 3 initializations
@@ -119,6 +120,14 @@ class Chemical(pg.GraphItem):
         for i, item in enumerate(self.textItems):
             item.setPos(*self.data['pos'][i])
 
+    def set_pos(self, x, y):
+        self.center.setX(x)
+        self.center.setY(y)
+        for row in self.pos:
+            row[0] += x
+            row[1] += y
+        self.updateGraph()
+
 
 class KeyFrame:
     """ Class for animating chemicals."""
@@ -145,66 +154,109 @@ class Reaction2:
     can be generalized into the generic 'Reaction' class above."""
     def __init__(self, viewer):
         self.viewer = viewer
-        # change these names away from "mol4" etc to make easier to work with.
+
+        # define text
+        intro_text = "This is an SN2 reaction with Alkyl Halides involving the nucleophile Hydroxide and the Alkyl Halide Bromomethane."
+        self.text_frame0 = TextItem(intro_text, 0, -5)
+
+        step1_text = "The hydroxide molecule approaches Bromomethane."
+        self.text_frame1 = TextItem(step1_text, -6, -4.5, step=1)
+
+        step2_text = "Since the hydroxide molecule is negatively charged, one of the electron pairs on the Oxygen attacks the positvely charged Carbon."
+        self.text_frame2 = TextItem(step2_text, -6, -4.5, step=2)
+
+        step3_text = "At the same time as the Oxygen attacks the Carbon and begins forming a new bond, the Carbon-Bromine bond is broken since Bromine is a good leaving group."
+        self.text_frame3 = TextItem(step3_text, -6, -4.5, step=3)
+
+        step4_text = "The final result is a new bond between the Oxygen in the hydroxide group and the Carbon, and a negatively charged Bromide."
+        self.text_frame4 = TextItem(step4_text, -6, -4.5, step=4)
+
+        # define molecules
         self._CH3Br = CH3Br()
         self._OH = OH()
         self._CH3OH = CH3OH()
         self._Br = Br()
         self.molecules = [self._CH3Br, self._OH, self._CH3OH, self._Br]
 
-        # define stage 1 of reaction
-        self.R2S1 = QtCore.QPropertyAnimation(self._CH3Br, b'pos')
-        self.R2S1.setDuration(8000)
-        self.R2S1.setStartValue(QtCore.QPointF(0, 0))
-        self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
-        self.R2S1.setEndValue(QtCore.QPointF(0, 0))
+        # set initial positions of chemicals
+        self._OH.set_pos(4, 4)
+        self._CH3Br.set_pos(-2, 0)
+        self._CH3OH.set_pos(-2, 0)
+        self._Br.set_pos(0, 1)
 
+        # define arrow animations
+        self.arrowAtReaction = CurveArrow(3, -1, -0.5, 0.5)
+
+        # define molecule animations
+        # animation positions are RELAVTIVE TO CURRENT. Not absolute.
         self.R2S2 = QtCore.QPropertyAnimation(self._OH, b'pos')
-        self.R2S2.setDuration(12000)
-        self.R2S2.setStartValue(QtCore.QPointF(2, 0.25))
-        self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
-        self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
-
-        self.R2S3 = QtCore.QPropertyAnimation(self._CH3OH, b'pos')
-        self.R2S3.setDuration(8000)
-        self.R2S3.setStartValue(QtCore.QPointF(0, 0))
-        self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
-        self.R2S3.setEndValue(QtCore.QPointF(0, 0))
+        self.R2S2.setDuration(1000)
+        self.R2S2.setStartValue(QtCore.QPointF(0, 0))
+        self.R2S2.setEndValue(QtCore.QPointF(-4, -3))
 
         self.R2S4 = QtCore.QPropertyAnimation(self._Br, b'pos')
-        self.R2S4.setDuration(8000)
+        self.R2S4.setDuration(1500)
         self.R2S4.setStartValue(QtCore.QPointF(0, 0))
-        self.R2S4.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
-        self.R2S4.setEndValue(QtCore.QPointF(0, 0))
-
-    def _add_molecules(self):
-        for molecule in self.molecules:
-            self.viewer.addItem(molecule)
+        self.R2S4.setKeyValueAt(0.33, QtCore.QPointF(0, 0))
+        self.R2S4.setEndValue(QtCore.QPointF(4, 4))
 
     def _remove_molecules(self):
         for molecule in self.molecules:
             self.viewer.removeItem(molecule)
 
     def start_frame(self, frame):
-        if frame == 1:
-            self.R2S1.start()
-        elif frame == 2:
+        if frame == 0:
+            # add new items that are not on scene
+            self.viewer.addItem(self.text_frame0)
+            self.viewer.addItem(self._OH)
+            self.viewer.addItem(self._CH3Br)
+
+        elif frame == 1:
+            # remove items from previous step that are no longer needed
+            self.viewer.removeItem(self.text_frame0)
+
+            # add new items that are not on scene
+            self.viewer.addItem(self.text_frame1)
+
+            # remove items from previous step that are no longer needed
             self.R2S2.start()
+
+        elif frame == 2:
+            # remove items from previous step that are no longer needed
+            self.viewer.removeItem(self.text_frame1)
+
+            # add new items that are not on scene
+            self.viewer.addItem(self.text_frame2)
+            self.viewer.addItem(self.arrowAtReaction.plot)
+
+            # start animations
+            self.arrowAtReaction.start()
+
         elif frame == 3:
-            self.R2S3.start()
+            # remove items from previous step that are no longer needed
+            self.viewer.removeItem(self.text_frame2)
+
+            # add new items that are not on scene
+            self.viewer.addItem(self.text_frame3)
+
         elif frame == 4:
+            # remove items from previous step that are no longer needed
+            self.viewer.removeItem(self.text_frame3)
+            self.viewer.removeItem(self.arrowAtReaction.plot)
+            self.viewer.removeItem(self._OH)
+            self.viewer.removeItem(self._CH3Br)
+
+            # add new items that are not on scene
+            self.viewer.addItem(self.text_frame4)
+            self.viewer.addItem(self._CH3OH)
+            self.viewer.addItem(self._Br)
+
+            # start animations
             self.R2S4.start()
+
         else:
             print(f"frame {frame} not recognized")
 
-    def start(self):
-        self._add_molecules()
-
-        # do keyframe 1
-        self.start_frame(1)
-        #self.start_frame(2)
-        #self.start_frame(3)
-        #self.start_frame(4)
 
 def LinInterp(p, q, t):
     """ Linearly interpolates between two points p and q to a point r(t),
@@ -417,11 +469,11 @@ class CH3Br(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-6, 0],
-                        [-5, 0],
-                        [-4, 0],
-                        [-5, 1],
-                        [-5, -1],
+                        [-1, 0],
+                        [0, 0],
+                        [1, 0],
+                        [0, 1],
+                        [0, -1],
                         ], dtype=float)
 
     def get_edges(self):
@@ -447,8 +499,8 @@ class OH(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [-9, -1],
-                        [-8, -1],
+                        [-0.5, 0],
+                        [0.5, 0],
                         ], dtype=float)
 
     def get_edges(self):
@@ -473,12 +525,12 @@ class CH3OH(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [4, 0],
-                        [3, 0],
-                        [2, 0],
-                        [1, 0],
-                        [2, 1],
-                        [2, -1],
+                        [1.5, 0],
+                        [0.5, 0],
+                        [-0.5, 0],
+                        [-1.5, 0],
+                        [-0.5, 1],
+                        [-0.5, -1],
                         ], dtype=float)
 
     def get_edges(self):
@@ -505,7 +557,7 @@ class Br(Chemical):
 
     def get_positions(self):
         return np.array([
-                        [9, 0],
+                        [0, 0],
                         ], dtype=float)
 
     def get_edges(self):

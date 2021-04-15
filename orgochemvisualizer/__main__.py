@@ -19,6 +19,9 @@ class AnimationViewer(pg.GraphicsView):
     def __init__(self):
         super(AnimationViewer, self).__init__()
 
+        self.frame = 0
+        self.current_reaction = ""
+
         #self.setAspectLocked()
         #self.setLimits(xMin=-10, xMax=10, yMin=-10, yMax=10)
         #self.setXRange(-10, 10)
@@ -50,9 +53,8 @@ class AnimationViewer(pg.GraphicsView):
         self.addItem(self.arrow.plot)
         #self.arrow.start()
 
-    def show_reaction(self, name):
+    def show_initial_reaction(self, name):
         self.sceneObj.clear()
-        #self.scene.clear()
 
         if name == "reaction1":
             mol3 = ca.HBr()
@@ -78,22 +80,16 @@ class AnimationViewer(pg.GraphicsView):
             self.R1S3.start()
 
         elif name == "reaction2":
+            self.current_reaction = "reaction2"
+            self.frame = 0
+
             # initialize reaction 2
             self.reaction2 = ca.Reaction2(self)
-            self.reaction2.start()
-
-            #see textboxes file to add text
-            # testing text box
-            example_text = "This is an SN2 reaction with Alkyl Halides involving the nucleophile Hydroxide and the Alkyl Halide Bromomethane."
-            step = 0
-            posX = 0
-            posY = -5
-            text1 = ca.TextItem(example_text, posX, posY, step=step)
-            self.addItem(text1)
+            self.reaction2.start_frame(self.frame)
 
             # testing animated arrow
-            self.arrow = ca.CurveArrow(-2, 0, 0.5, 0)
-            self.addItem(self.arrow.plot)
+            #self.arrow = ca.CurveArrow(-2, 0, 0.5, 0)
+            #self.addItem(self.arrow.plot)
             #self.arrow.start()
 
             # testing animated arrow
@@ -124,8 +120,6 @@ class AnimationViewer(pg.GraphicsView):
             self.addItem(mol18)
             self.addItem(mol19)
             self.addItem(mol20)
-
-            print("reaction 3 was pressed!")
 
             #Initial animation for H2O
             self.R3S1 = QtCore.QPropertyAnimation(mol1, b'pos')
@@ -194,6 +188,15 @@ class AnimationViewer(pg.GraphicsView):
         else:
             print(f"Error: {name} reaction name not recognized.")
 
+    def increase_frame(self):
+        if self.current_reaction == "reaction1":
+            pass
+        elif self.current_reaction == "reaction2":
+            self.frame += 1
+            self.reaction2.start_frame(self.frame)
+        elif self.current_reaction == "reaction3":
+            pass
+
 
 class KeyframeChooser(QtWidgets.QWidget):
     """ Widget for controlling which keyframe is being displayed. """
@@ -203,12 +206,10 @@ class KeyframeChooser(QtWidgets.QWidget):
         layout = QtWidgets.QVBoxLayout()
         self.label = QtGui.QLabel("Click through the reaction:")
         self.next_btn = QtGui.QPushButton("Next")
-        self.prev_btn = QtGui.QPushButton("Previous")
 
         L = QtGui.QHBoxLayout()
         W = QtWidgets.QWidget()
 
-        L.addWidget(self.prev_btn)
         L.addWidget(self.next_btn)
         W.setLayout(L)
 
@@ -278,12 +279,15 @@ class MainWindow(QtWidgets.QMainWindow):
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
 
+        self.frame = 0
         self.set.rs.viewHBrRadio.toggled.connect(
-            lambda: self.av.show_reaction("reaction1"))
+            lambda: self.av.show_initial_reaction("reaction1"))
         self.set.rs.viewSN2Radio.toggled.connect(
-            lambda: self.av.show_reaction("reaction2"))
+            lambda: self.av.show_initial_reaction("reaction2"))
         self.set.rs.viewE1Radio.toggled.connect(
-            lambda: self.av.show_reaction("reaction3"))
+            lambda: self.av.show_initial_reaction("reaction3"))
+
+        self.set.fc.next_btn.clicked.connect(self.av.increase_frame)
 
 
 def main():
