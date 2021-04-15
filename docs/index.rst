@@ -24,4 +24,4 @@ or the :ref:`developer-guide` for information on how to contribute!
 
    userGuide
    developerGuide
-   modules
+   orgochemvisualizer

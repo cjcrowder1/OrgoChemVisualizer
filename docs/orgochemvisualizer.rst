@@ -1,11 +1,5 @@
-orgochemvisualizer package
-==========================
-
-Submodules
-----------
-
-orgochemvisualizer.chemanim module
-----------------------------------
+API
+===
 
 .. automodule:: orgochemvisualizer.chemanim
     :members:

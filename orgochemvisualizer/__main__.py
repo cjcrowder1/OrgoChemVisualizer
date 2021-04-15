@@ -30,47 +30,7 @@ class AnimationViewer(pg.GraphicsView):
 
         #self.scene = self.scene
 
-        #self.mol1 = ca.H2O()
-        #self.mol2 = ca.CO2()
-        #self.mol3 = ca.HBr()
-        #self.mol4 = ca.CH3Br()
-        #self.mol5 = ca.OH()
-        #self.mol6 = ca.Br()
-        #self.mol7 = ca.C3H7Br()
-        #self.mol8 = ca.C4H9Br()
-        #self.mol9 = ca.H3O()
-        #self.mol10 = ca.C3H6()
-        #self.mol11 = ca.C3H7()
-        #self.mol12 = ca.CH3OH()
-        #self.mol13 = ca.Br2()
-        #self.mol14 = ca.C2H5OH()
-        #self.mol15 = ca.H2SO4()
-        #self.mol16 = ca.C2H5OH2()
-        #self.mol17 = ca.HSO4()
-        #self.mol18 = ca.C2H4()
-        #self.mol19 = ca.H2SO4f()
-        #self.mol20 = ca.H2Of()
-
-        #self.addItem(mol1)
-        #self.addItem(mol2)
-        #self.addItem(mol3)
-        #self.addItem(mol4)
-        #self.addItem(mol5)
-        #self.addItem(mol6)
-        #self.addItem(mol7)
-        #self.addItem(mol8)
-        #self.addItem(mol9)
-        #self.addItem(mol10)
-        #self.addItem(mol11)
-        #self.addItem(mol12)
-        #self.addItem(mol13)
-        #self.addItem(mol14)
-        #self.addItem(mol15)
-        #self.addItem(mol16)
-        #self.addItem(mol17)
-        #self.addItem(mol18)
-        #self.addItem(mol19)
-        #self.addItem(mol20)
+        # initialize reaction2 object
 
         # testing text box
         example_text = "This is a text. I wonder what this will look like."
@@ -118,47 +78,9 @@ class AnimationViewer(pg.GraphicsView):
             self.R1S3.start()
 
         elif name == "reaction2":
-            mol4 = ca.CH3Br()
-            mol5 = ca.OH()
-            mol12 = ca.CH3OH()
-            mol6 = ca.Br()
-            self.addItem(mol4)
-            self.addItem(mol5)
-            self.addItem(mol12)
-            self.addItem(mol6)
-
-            print("reaction 2 was pressed!")
-            #Initial animation for CH3Br
-            self.R2S1 = QtCore.QPropertyAnimation(mol4, b'pos')
-            self.R2S1.setDuration(8000)
-            self.R2S1.setStartValue(QtCore.QPointF(0, 0))
-            self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
-            self.R2S1.setEndValue(QtCore.QPointF(0, 0))
-            self.R2S1.start()
-
-            #Initial animation for OH-
-            self.R2S2 = QtCore.QPropertyAnimation(mol5, b'pos')
-            self.R2S2.setDuration(12000)
-            self.R2S2.setStartValue(QtCore.QPointF(2, 0.25))
-            self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
-            self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
-            self.R2S2.start()
-
-            #Initial animation for CH3OH
-            self.R2S3 = QtCore.QPropertyAnimation(mol12, b'pos')
-            self.R2S3.setDuration(8000)
-            self.R2S3.setStartValue(QtCore.QPointF(0, 0))
-            self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
-            self.R2S3.setEndValue(QtCore.QPointF(0, 0))
-            self.R2S3.start()
-
-            #Initial animation for Br
-            self.R2S4 = QtCore.QPropertyAnimation(mol12, b'pos')
-            self.R2S4.setDuration(8000)
-            self.R2S4.setStartValue(QtCore.QPointF(0, 0))
-            self.R2S4.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
-            self.R2S4.setEndValue(QtCore.QPointF(0, 0))
-            self.R2S4.start()           
+            # initialize reaction 2
+            self.reaction2 = ca.Reaction2(self)
+            self.reaction2.start()
 
             #see textboxes file to add text
             # testing text box
@@ -183,7 +105,6 @@ class AnimationViewer(pg.GraphicsView):
             # self.arrow = ca.CurveArrow(-3.25, 0.75, -2.75, 1)
             # self.addItem(self.arrow.plot)
             #self.arrow.start()
-
 
         elif name == "reaction3":
             mol1 = ca.H2O()
@@ -274,6 +195,29 @@ class AnimationViewer(pg.GraphicsView):
             print(f"Error: {name} reaction name not recognized.")
 
 
+class KeyframeChooser(QtWidgets.QWidget):
+    """ Widget for controlling which keyframe is being displayed. """
+    def __init__(self, parent=None):
+        super(KeyframeChooser, self).__init__(parent)
+
+        layout = QtWidgets.QVBoxLayout()
+        self.label = QtGui.QLabel("Click through the reaction:")
+        self.next_btn = QtGui.QPushButton("Next")
+        self.prev_btn = QtGui.QPushButton("Previous")
+
+        L = QtGui.QHBoxLayout()
+        W = QtWidgets.QWidget()
+
+        L.addWidget(self.prev_btn)
+        L.addWidget(self.next_btn)
+        W.setLayout(L)
+
+        layout.addWidget(self.label)
+        layout.addWidget(W)
+
+        self.setLayout(layout)
+
+
 class ReactionSelection(QtWidgets.QWidget):
     """ class containing settings for selecting which reaction to view """
     def __init__(self, parent=None):
@@ -302,10 +246,12 @@ class Settings(QtWidgets.QWidget):
 
         layout = QtWidgets.QVBoxLayout()
 
-        self.start_btn = QtWidgets.QPushButton("Start", self)
+        self.start_btn = QtWidgets.QPushButton("Start (does nothing)", self)
+        self.fc = KeyframeChooser()
         self.rs = ReactionSelection()
 
         layout.addWidget(self.start_btn)
+        layout.addWidget(self.fc)
         layout.addWidget(self.rs)
         layout.addStretch(1)
 

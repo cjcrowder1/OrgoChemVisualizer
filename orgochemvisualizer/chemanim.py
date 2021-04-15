@@ -9,7 +9,7 @@ nice to add in skeletal formula for more typical orgo representations
 
 import numpy as np
 import pyqtgraph as pg
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtCore
 
 # see https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts
 # \u2009 is a 'thin space' character that makes it easier to see superscript
@@ -20,9 +20,6 @@ SUPTWO = '\u2009'+'\u00B2'
 class Chemical(pg.GraphItem):
     """ Class for drawing chemicals. Initial position is a
     2-item numpy 1D-array.
-
-    Need to add in double bonds
-
     """
 
     def __init__(self):
@@ -40,7 +37,6 @@ class Chemical(pg.GraphItem):
             self.n_connections = self.data['adj'].shape[0]
 
         if 'bonds' in self.data:
-            print('bonds: ', self.data['bonds'])
             self.n_singles = sum(val == "s" for val in self.data['bonds'])
             self.n_doubles = sum(val == 'd' for val in self.data['bonds'])
         # in case 'bonds' isn't given, assume all singles
@@ -53,7 +49,6 @@ class Chemical(pg.GraphItem):
                 self.n_singles = 0
                 self.n_doubles = 0
 
-        print('# doubles: ', self.n_doubles)
         if 'adj' in self.data:
             self.n_bonds = self.n_singles + 2*self.n_doubles
 
@@ -63,16 +58,11 @@ class Chemical(pg.GraphItem):
             self.npts = self.n_atoms + 2*self.n_bonds
             new_pos = np.zeros((self.npts, 2), dtype=float)
 
-            print('# atoms: ', self.n_atoms)
-            print('# bonds: ', self.n_bonds)
-            print('# pts: ', self.npts)
-
             # points in atom locations
             for ti in range(self.n_atoms):
                 new_pos[ti, 0] = self.data['pos'][ti, 0]
                 new_pos[ti, 1] = self.data['pos'][ti, 1]
 
-            print(self.n_connections)
             n_singles_count = 0
             # ghost points adjusted for single or double bonds
             for edge, ti in enumerate(range(self.n_atoms,
@@ -80,8 +70,7 @@ class Chemical(pg.GraphItem):
                                             2)):
                 point1 = self.data['pos'][self.data['adj'][edge, 0]]
                 point2 = self.data['pos'][self.data['adj'][edge, 1]]
-                #print(edge)
-                print('edge val: ', self.data['bonds'][edge])
+
                 if self.data['bonds'][edge] == 's':
                     r1, r2 = generate_single_bond_nodes(point1, point2)
                     new_pos[ti, :] = r1
@@ -99,8 +88,6 @@ class Chemical(pg.GraphItem):
             self.data['size'] = [5]*self.n_atoms + [0]*2*self.n_bonds
             self.data['symbol'] = self.data['symbol'] + ['o']*2*self.n_bonds
             self.data['adj'] = np.zeros((self.n_bonds, 2), dtype=int)
-            print(self.data['pos'])
-            print('nbonds: ', self.n_bonds)
             for ti in range(self.n_bonds):
                 self.data['adj'][ti] = [self.n_atoms + 2*ti,
                                         self.n_atoms + 2*ti + 1]
@@ -116,7 +103,6 @@ class Chemical(pg.GraphItem):
 
         self.setTexts(self.text)
         self.updateGraph()
-        print(' ')
 
     def setTexts(self, text):
         for i in self.textItems:
@@ -133,6 +119,92 @@ class Chemical(pg.GraphItem):
         for i, item in enumerate(self.textItems):
             item.setPos(*self.data['pos'][i])
 
+
+class KeyFrame:
+    """ Class for animating chemicals."""
+    def __init__(self, labels=[], molecules=[],
+                 arrows=[], animations=[]):
+        self.labels = labels
+        self.molecules = molecules
+        self.arrows = arrows
+        self.animations = animations
+
+    def start(self):
+        pass
+
+
+#class Reaction:
+#    """Generic Reaction template."""
+#    def __init__(self):
+#        self.molecules = []
+#        self.frames = []
+
+
+class Reaction2:
+    """Will start off with just reaction 2, and will eventually move parts that
+    can be generalized into the generic 'Reaction' class above."""
+    def __init__(self, viewer):
+        self.viewer = viewer
+        # change these names away from "mol4" etc to make easier to work with.
+        self._CH3Br = CH3Br()
+        self._OH = OH()
+        self._CH3OH = CH3OH()
+        self._Br = Br()
+        self.molecules = [self._CH3Br, self._OH, self._CH3OH, self._Br]
+
+        # define stage 1 of reaction
+        self.R2S1 = QtCore.QPropertyAnimation(self._CH3Br, b'pos')
+        self.R2S1.setDuration(8000)
+        self.R2S1.setStartValue(QtCore.QPointF(0, 0))
+        self.R2S1.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        self.R2S1.setEndValue(QtCore.QPointF(0, 0))
+
+        self.R2S2 = QtCore.QPropertyAnimation(self._OH, b'pos')
+        self.R2S2.setDuration(12000)
+        self.R2S2.setStartValue(QtCore.QPointF(2, 0.25))
+        self.R2S2.setKeyValueAt(0.3, QtCore.QPointF(2, 0.25))
+        self.R2S2.setEndValue(QtCore.QPointF(2, 0.25))
+
+        self.R2S3 = QtCore.QPropertyAnimation(self._CH3OH, b'pos')
+        self.R2S3.setDuration(8000)
+        self.R2S3.setStartValue(QtCore.QPointF(0, 0))
+        self.R2S3.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        self.R2S3.setEndValue(QtCore.QPointF(0, 0))
+
+        self.R2S4 = QtCore.QPropertyAnimation(self._Br, b'pos')
+        self.R2S4.setDuration(8000)
+        self.R2S4.setStartValue(QtCore.QPointF(0, 0))
+        self.R2S4.setKeyValueAt(0.3, QtCore.QPointF(0, 0))
+        self.R2S4.setEndValue(QtCore.QPointF(0, 0))
+
+    def _add_molecules(self):
+        for molecule in self.molecules:
+            self.viewer.addItem(molecule)
+
+    def _remove_molecules(self):
+        for molecule in self.molecules:
+            self.viewer.removeItem(molecule)
+
+    def start_frame(self, frame):
+        if frame == 1:
+            self.R2S1.start()
+        elif frame == 2:
+            self.R2S2.start()
+        elif frame == 3:
+            self.R2S3.start()
+        elif frame == 4:
+            self.R2S4.start()
+        else:
+            print(f"frame {frame} not recognized")
+
+    def start(self):
+        self._add_molecules()
+
+        # do keyframe 1
+        self.start_frame(1)
+        #self.start_frame(2)
+        #self.start_frame(3)
+        #self.start_frame(4)
 
 def LinInterp(p, q, t):
     """ Linearly interpolates between two points p and q to a point r(t),
@@ -156,6 +228,7 @@ def compute_ortho_vec(p, q):
 
 
 def generate_single_bond_nodes(point1, point2):
+    """Generates single bond ghost nodes."""
     percent_offset = 0.35
     new1 = LinInterp(point1, point2, percent_offset)
     new2 = LinInterp(point1, point2, 1 - percent_offset)
@@ -164,6 +237,7 @@ def generate_single_bond_nodes(point1, point2):
 
 
 def generate_double_bond_nodes(point1, point2):
+    """Generates double bond ghost nodes."""
     percent_offset = 0.05
 
     # first find orthonormal vector for 2 points
@@ -236,6 +310,7 @@ class TextItem(pg.TextItem):
 
 
 def strToSym(string):
+    """Converts string to symbol, which can then be displayed."""
     symbol = QtGui.QPainterPath()
     f = QtGui.QFont()
     f.setPointSize(1)
@@ -249,21 +324,8 @@ def strToSym(string):
     return tr.map(symbol)
 
 
-# test
-class TestSymbols():
-    # something like a bowtie
-    valves = np.asarray([
-                [0.4330127, 0.25],
-                [0.4330127, -0.25],
-                [-0.4330127, 0.25],
-                [-0.4330127, -0.25],
-                [0.4330127, 0.25]
-                ])
-
-    valve = pg.arrayToQPath(valves[:, 0], valves[:, 1], connect='all')
-
-
 class H2O(Chemical):
+    """Class for H2O."""
     def __init__(self):
         super(H2O, self).__init__()
 
@@ -289,6 +351,7 @@ class H2O(Chemical):
 
 
 class CO2(Chemical):
+    """Class for CO2."""
     def __init__(self):
         super(CO2, self).__init__()
 
@@ -314,6 +377,7 @@ class CO2(Chemical):
 
 
 class HBr(Chemical):
+    """Class for HBr."""
     def __init__(self):
         super(HBr, self).__init__()
 
@@ -339,6 +403,7 @@ class HBr(Chemical):
 
 
 class CH3Br(Chemical):
+    """Class for CH3Br."""
     def __init__(self):
         super(CH3Br, self).__init__()
 
@@ -369,6 +434,7 @@ class CH3Br(Chemical):
 
 
 class OH(Chemical):
+    """Class for OH."""
     def __init__(self):
         super(OH, self).__init__()
 
@@ -392,6 +458,7 @@ class OH(Chemical):
 
 
 class CH3OH(Chemical):
+    """Class for CH3OH."""
     def __init__(self):
         super(CH3OH, self).__init__()
 
@@ -425,6 +492,7 @@ class CH3OH(Chemical):
 
 
 class Br(Chemical):
+    """Class for Br."""
     def __init__(self):
         super(Br, self).__init__()
 
@@ -447,7 +515,10 @@ class Br(Chemical):
 
 
 class C3H7Br(Chemical):
-    """this is in line format, could also do a more simplified format of the molecule"""
+    """Class for C3H7Br.
+
+    This is in line format, could also do a more simplified
+    format of the molecule"""
 
     def __init__(self):
         super(C3H7Br, self).__init__()
@@ -491,6 +562,7 @@ class C3H7Br(Chemical):
 
 
 class C4H9Br(Chemical):
+    """Class for C4H9Br."""
     def __init__(self):
         super(C4H9Br, self).__init__()
 
@@ -540,6 +612,7 @@ class C4H9Br(Chemical):
 
 
 class H3O(Chemical):
+    """Class for H3O."""
     def __init__(self):
         super(H3O, self).__init__()
 
@@ -567,7 +640,9 @@ class H3O(Chemical):
 
 
 class C3H6(Chemical):
-    """alkene needs double bond"""
+    """Class for C3H6.
+
+    Alkene needs double bond"""
     def __init__(self):
         super(C3H6, self).__init__()
 
@@ -607,7 +682,9 @@ class C3H6(Chemical):
 
 
 class C3H7(Chemical):
-    """#needs a + charge"""
+    """Class for C3H7.
+
+    Needs a + charge"""
     def __init__(self):
         super(C3H7, self).__init__()
 
@@ -649,6 +726,7 @@ class C3H7(Chemical):
 
 
 class Br2(Chemical):
+    """Class for Br2."""
     def __init__(self):
         super(Br2, self).__init__()
 
@@ -671,6 +749,7 @@ class Br2(Chemical):
 
 
 class C2H5OH(Chemical):
+    """Class for C2H5OH."""
     def __init__(self):
         super(C2H5OH, self).__init__()
 
@@ -710,6 +789,7 @@ class C2H5OH(Chemical):
 
 
 class H2SO4(Chemical):
+    """Class for H2SO4."""
     def __init__(self):
         super(H2SO4, self).__init__()
 
@@ -745,7 +825,9 @@ class H2SO4(Chemical):
 
 
 class C2H5OH2(Chemical):
-    """#Needs plus sign"""
+    """Class for C2H5OH2.
+
+    Needs plus sign"""
     def __init__(self):
         super(C2H5OH2, self).__init__()
 
@@ -788,7 +870,9 @@ class C2H5OH2(Chemical):
 
 
 class HSO4(Chemical):
-    """#Needs minus sign"""
+    """Class for HSO4.
+
+    Needs minus sign"""
     def __init__(self):
         super(HSO4, self).__init__()
 
@@ -830,7 +914,9 @@ class HSO4(Chemical):
 
 
 class C2H4(Chemical):
-    """#Needs a double bond"""
+    """Class for C2H4.
+
+    Needs a double bond"""
     def __init__(self):
         super(C2H4, self).__init__()
 
@@ -863,6 +949,9 @@ class C2H4(Chemical):
 
 
 class H2SO4f(Chemical):
+    """Class for H2SO4f.
+
+    How does this differ from H2SO4?"""
     def __init__(self):
         super(H2SO4f, self).__init__()
 
@@ -898,6 +987,9 @@ class H2SO4f(Chemical):
 
 
 class H2Of(Chemical):
+    """Class for H2Of.
+
+    How does this differ from H2O?"""
     def __init__(self):
         super(H2Of, self).__init__()
 
